@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry excluding="eco/" kind="src" path="Data"/>
+	<classpathentry kind="src" path="Data/eco"/>
+	<classpathentry excluding="server/model/players/" kind="src" path="src"/>
+	<classpathentry kind="src" path="src/server/model/players"/>
+	<classpathentry exported="true" kind="lib" path="deps/jython.jar"/>
+	<classpathentry exported="true" kind="lib" path="deps/log4j-1.2.15.jar"/>
+	<classpathentry exported="true" kind="lib" path="deps/mina.jar"/>
+	<classpathentry exported="true" kind="lib" path="deps/mysql.jar"/>
+	<classpathentry exported="true" kind="lib" path="deps/poi.jar"/>
+	<classpathentry exported="true" kind="lib" path="deps/slf4j-nop.jar"/>
+	<classpathentry exported="true" kind="lib" path="deps/slf4j.jar"/>
+	<classpathentry exported="true" kind="lib" path="deps/xstream.jar"/>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
