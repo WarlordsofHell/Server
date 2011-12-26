@@ -20,7 +20,19 @@ public class DialogueHandler {
 			sendOption4("Information", "Black Jack","Five", "Maybe later...");
 			c.dialogueAction = 100;
 			break;
+case 106:
+				sendOption5("One 6-sided die", "Two 6-sided dice", "One 4-sided die", "One 8-sided die", "More...");
+				c.dialogueAction = 106;
+				c.teleAction = 0;
+				c.nextChat = 0;
+				break;
 
+			case 107:
+				sendOption5("One 10-sided die", "One 12-sided die", "One 20-sided die", "Two 10-sided dice for 1-100", "Back...");
+				c.dialogueAction = 107;
+				c.teleAction = 0;
+				c.nextChat = 0;
+				break;
 		case 25:
 			sendOption4("","Black Jack", "Five","");
 			c.dialogueAction = 101;

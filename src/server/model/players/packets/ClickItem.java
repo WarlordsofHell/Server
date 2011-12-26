@@ -57,6 +57,14 @@ public class ClickItem implements PacketType {
 			} else if (itemId == 8012) {
 				TeleportingTab.teleportTab(c,2549,3113,0,itemId,itemSlot); 
 			}
+				if (itemId > 15085 && itemId < 15102){
+			c.useDice(itemId, false);
+		}
+		if (itemId == 15084)
+		{//dice bag
+			c.diceID = itemId;
+			c.getDH().sendDialogues(106, 0);
+		}
 		if (itemId == 952) {
 			if(c.inArea(3553, 3301, 3561, 3294)) {
 				c.teleTimer = 3;

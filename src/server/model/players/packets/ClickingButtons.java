@@ -45,6 +45,21 @@ public class ClickingButtons implements PacketType {
 
 			//1st tele option
 			case 9190:
+			if (c.dialogueAction == 106) {
+					if(c.getItems().playerHasItem(c.diceID, 1)) {
+						c.getItems().deleteItem(c.diceID, c.getItems().getItemSlot(c.diceID), 1);	
+						c.getItems().addItem(15086, 1);
+						c.sendMessage("You get a six-sided die out of the dice bag.");
+					}
+					c.getPA().closeAllWindows();
+				} else if (c.dialogueAction == 107) {
+					if(c.getItems().playerHasItem(c.diceID, 1)) {
+						c.getItems().deleteItem(c.diceID, c.getItems().getItemSlot(c.diceID), 1);	
+						c.getItems().addItem(15092, 1);
+						c.sendMessage("You get a ten-sided die out of the dice bag.");
+					}
+					c.getPA().closeAllWindows();
+				}
 				if (c.teleAction == 1) {
 					//rock crabs
 					c.getPA().spellTeleport(2676, 3715, 0);
@@ -80,6 +95,21 @@ public class ClickingButtons implements PacketType {
 
 			//2nd tele option
 			case 9191:
+			if (c.dialogueAction == 106) {
+					if(c.getItems().playerHasItem(c.diceID, 1)) {
+						c.getItems().deleteItem(c.diceID, c.getItems().getItemSlot(c.diceID), 1);	
+						c.getItems().addItem(15088, 1);
+						c.sendMessage("You get two six-sided dice out of the dice bag.");
+					}
+					c.getPA().closeAllWindows();
+				} else if (c.dialogueAction == 107) {
+					if(c.getItems().playerHasItem(c.diceID, 1)) {
+						c.getItems().deleteItem(c.diceID, c.getItems().getItemSlot(c.diceID), 1);	
+						c.getItems().addItem(15094, 1);
+						c.sendMessage("You get a twelve-sided die out of the dice bag.");
+					}
+					c.getPA().closeAllWindows();
+				}
 				if (c.teleAction == 1) {
 					//tav dungeon
 					c.getPA().spellTeleport(2884, 9798, 0);
@@ -112,6 +142,21 @@ public class ClickingButtons implements PacketType {
 			//3rd tele option	
 
 			case 9192:
+			if (c.dialogueAction == 106) {
+					if(c.getItems().playerHasItem(c.diceID, 1)) {
+						c.getItems().deleteItem(c.diceID, c.getItems().getItemSlot(c.diceID), 1);	
+						c.getItems().addItem(15100, 1);
+						c.sendMessage("You get a four-sided die out of the dice bag.");
+					}
+					c.getPA().closeAllWindows();
+				} else if (c.dialogueAction == 107) {
+					if(c.getItems().playerHasItem(c.diceID, 1)) {
+						c.getItems().deleteItem(c.diceID, c.getItems().getItemSlot(c.diceID), 1);	
+						c.getItems().addItem(15096, 1);
+						c.sendMessage("You get a twenty-sided die out of the dice bag.");
+				}
+					c.getPA().closeAllWindows();
+				}
 				if (c.teleAction == 1) {
 					//slayer tower
 					c.getPA().spellTeleport(3428, 3537, 0);
@@ -147,6 +192,21 @@ public class ClickingButtons implements PacketType {
 				break;
 			//4th tele option
 			case 9193:
+			if (c.dialogueAction == 106) {
+					if(c.getItems().playerHasItem(c.diceID, 1)) {
+						c.getItems().deleteItem(c.diceID, c.getItems().getItemSlot(c.diceID), 1);	
+						c.getItems().addItem(15090, 1);
+						c.sendMessage("You get an eight-sided die out of the dice bag.");
+					}
+					c.getPA().closeAllWindows();
+				} else if (c.dialogueAction == 107) {
+					if(c.getItems().playerHasItem(c.diceID, 1)) {
+						c.getItems().deleteItem(c.diceID, c.getItems().getItemSlot(c.diceID), 1);	
+						c.getItems().addItem(15098, 1);
+						c.sendMessage("You get the percentile dice out of the dice bag.");
+				}
+					c.getPA().closeAllWindows();
+				}
 				if (c.teleAction == 1) {
 					//brimhaven dungeon
 					c.getPA().spellTeleport(2710, 9466, 0);
@@ -182,6 +242,13 @@ public class ClickingButtons implements PacketType {
 				break;
 			//5th tele option
 			case 9194:
+			if (c.dialogueAction == 106) {
+				c.getDH().sendDialogues(107, 0);
+				break;
+				} else if (c.dialogueAction == 107) {
+				c.getDH().sendDialogues(106, 0);
+				break;
+				}
 				if (c.teleAction == 1) {
 					//island
 					c.getPA().spellTeleport(3297, 9824, 0);

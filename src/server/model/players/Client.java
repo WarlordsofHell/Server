@@ -336,7 +336,54 @@ appearanceUpdateRequired = true;
 	}
 	
 
+public void FetchDice()
+	{
+		int rnd;
+		String Message = "";
+		if (cDice == 0 || (System.currentTimeMillis() - diceDelay <= 1000)) {
+			return;
+		}
+		switch (cDice) {
+		//Dice
+			case 15096: rnd = Misc.random(19)+1; Message = ("rolled <col=16711680>"+ rnd +"</col> on a twenty-sided die."); break;
+			case 15094: rnd = Misc.random(11)+1; Message = ("rolled <col=16711680>"+ rnd +"</col> on a twelve-sided die."); break;
+			case 15092: rnd = Misc.random(9)+1; Message = ("rolled <col=16711680>"+ rnd +"</col> on a ten-sided die."); break;
+			case 15090: rnd = Misc.random(7)+1; Message = ("rolled <col=16711680>"+ rnd +"</col> on an eight-sided die."); break;
+			case 15100: rnd = Misc.random(3)+1; Message = ("rolled <col=16711680>"+ rnd +"</col> on a four-sided die."); break;
+			case 15086: rnd = Misc.random(5)+1;	Message = ("rolled <col=16711680>"+ rnd +"</col> on a six-sided die."); break;
+			case 15088: rnd = Misc.random(11)+1; Message = ("rolled <col=16711680>"+ rnd +"</col> on two six-sided dice."); break;
+			case 15098: rnd = Misc.random(99)+1; Message = ("rolled <col=16711680>"+ rnd +"</col> on the percentile dice."); break;
+		}
+		sendMessage("You " + Message);
+			if (clanDice){
+				if (clanId >= 0) {
+					Server.clanChat.messageToClan("Clan Chat channel-mate <col=16711680>"+playerName+"</col> "+Message, clanId);
+				}
+			}
+		cDice = 0;
+	}
 
+	public void useDice(int itemId, boolean clan){
+			if (System.currentTimeMillis() - diceDelay >= 3000) {
+				sendMessage("Rolling...");
+				startAnimation(11900);
+				diceDelay = System.currentTimeMillis();
+				cDice = itemId;
+				clanDice = clan;
+			switch (itemId) {
+				//Gfx's
+				case 15086: gfx0(2072); break;
+				case 15088: gfx0(2074); break;
+				case 15090: gfx0(2071); break;
+				case 15092: gfx0(2070); break;
+				case 15094: gfx0(2073); break;
+				case 15096: gfx0(2068); break;
+				case 15098: gfx0(2075); break;
+				case 15100: gfx0(2069); break;
+			}
+		}
+
+	}
 	public void update() {
 		synchronized (this) {
 			handler.updatePlayer(this, outStream);
@@ -375,6 +422,7 @@ appearanceUpdateRequired = true;
 	public int packetSize = 0, packetType = -1;
 	
 	public void process() {
+	FetchDice();
 		getWoodcutting().wcProcesses();
 		if(clawDelay > 0) {
 			clawDelay--;

@@ -1356,6 +1356,14 @@ Server.itemHandler.createGroundItem(o, FoodDrop(), c.getX(), c.getY(), 1, c.kill
 					c.sendMessage("Wearing arrows has been disabled in this duel!");
 					return false;
 				}
+				if (wearID > 15085 && wearID < 15102){
+				if (c.clanId >= 0){
+					c.useDice(wearID, true);
+				}else{
+					c.sendMessage("You must be in a clan chat channel to do that.");
+				}
+					return false;
+			}
 
 				if(Config.itemRequirements) {
 					if(targetSlot == 10 || targetSlot == 7 || targetSlot == 5 || targetSlot == 4 || targetSlot == 0 || targetSlot == 9 || targetSlot == 10) {

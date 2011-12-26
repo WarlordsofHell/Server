@@ -22,6 +22,12 @@ public abstract class Player {
 	//Custom Digging System
 	public long lastDig;
 	//End Custom Digging
+	//Dicing
+	public boolean clanDice = false;
+	public long diceDelay;
+	public int diceID = 15084;
+	public int cDice = 0;
+	//End Dicing
 	public Hit hitDiff2;
 	public Hit hitDiff;
 	public int altarPrayed = 0;
