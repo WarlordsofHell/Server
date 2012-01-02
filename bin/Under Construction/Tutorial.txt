@@ -1,0 +1,122 @@
+Step 1:
+Put Woodcutting.java and TreeRespawn.java to your "src/server/model/players/skills" folder.
+
+Step 2:
+Open Server.java.
+1)UNDER THIS:
+
+"
+public class Server {
+"
+
+PASTE THIS:
+
+"
+public static TreeRespawn[] trees = new TreeRespawn[2000];
+public static ArrayList treesToRespawn = new ArrayList<Integer>();
+public static int[] treesToRespawn2;
+public static int[] convertIntegers(ArrayList<Integer> integers){
+	int[] ret = new int[integers.size()];
+	for (int i=0; i < ret.length; i++){
+		ret[i] = integers.get(i).intValue();
+	}
+	return ret;
+}
+"
+
+2)UNDER THIS:
+
+"
+import server.model.players.Player;
+"
+
+PASTE THIS IF ITS NOT ALREADY IN IMPORTS
+
+"
+import server.model.players.skills.*;
+import java.util.ArrayList;
+"
+
+3)UNDER THIS:
+
+"
+playerHandler.process();
+"
+
+PASTE THIS:
+
+"
+if(treesToRespawn2 != null){
+	for(int t : treesToRespawn2){
+		if(trees[t] != null){
+			trees[t].respawnTree();
+		}
+	}
+}
+"
+
+Step 3:
+Open Client.java.
+1)UNDER THIS:
+"
+public class Client extends Player {
+"
+PASTE THIS:
+"
+public boolean cuttingTree = false;
+public long wcEmoteDelay;
+"
+
+2)UNDER THIS:
+
+"
+public void process() {
+"
+
+PASTE THIS:
+
+"
+getWoodcutting().wcProcesses();
+"
+
+Step 4:
+Open Walking.java.
+1)UNDER THIS:
+"
+c.playerIndex = 0;
+"
+PASTE THIS:
+"
+if(c.cuttingTree){
+	c.getPA().resetVariables();
+	c.getWoodcutting().resetWoodcut();
+}
+"
+
+Step 5:
+Open ObjectManager.java.
+1)SEARCH FOR THIS:
+
+"
+public void loadCustomSpawns(Client c) {
+"
+
+Scroll down the loadCustomSpawns(Client c) and paste this code but LOWER than your custom spawned trees, if you have them:
+"
+//stumps
+if(Server.treesToRespawn2 != null){
+	for(int a : Server.treesToRespawn2){
+		if(Server.trees[a] != null){
+			c.getPA().object(Server.trees[a].stumpId, Server.trees[a].stumpX, Server.trees[a].stumpY, 0, 10);
+		}
+	}
+}
+//end of stumps
+"
+
+Thats all, just compile and run. Change "private final int maxLogsInOneTree; private final int treeRespawnTimer;" if you want in Woodcutting.java. If you get any errors when compiling reply them and I will update this tutorial.
+Thanks for reading.
+Credits:
+Sanity - For making the source :).
+Me - For recoding wc, adding stumps, tree respawns and making this tutorial :).
+------

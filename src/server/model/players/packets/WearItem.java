@@ -2,12 +2,7 @@ package server.model.players.packets;
 
 import server.model.players.Client;
 import server.model.players.PacketType;
-import server.Config;
-import java.io.*;
 import server.util.*;
-import server.model.npcs.*;
-import server.*;
-import server.model.items.*;
 
 
 /**
@@ -25,6 +20,7 @@ public class WearItem implements PacketType {
 		int oldCombatTimer = c.attackTimer;
 		if (c.playerIndex > 0 || c.npcIndex > 0)
 			c.getCombat().resetPlayerAttack();
+
 		if (c.wearId >= 5509 && c.wearId <= 5515) {
 			int pouch = -1;
 			int a = c.wearId;
@@ -46,11 +42,26 @@ public class WearItem implements PacketType {
 			if (c.playerEquipment[c.wearSlot] == 13350 || c.playerEquipment[c.wearSlot] == 13348 || c.playerEquipment[c.wearSlot] == 13346) //Virtus
 				torvaChanged = true;
 		}
+                
+                                                if(c.wearId == 7927) {
+		c.resetWalkingQueue();
+for (int i = 0; i < 14; i++) {
+	c.setSidebarInterface(i, 6014);
+}
+c.isMorphed = true;
+c.sendMessage("As you put on the ring you turn into an egg!");
+c.npcId2 = 3689 + Misc.random(5);
+c.isNpc = true;
+c.updateRequired = true;
+c.appearanceUpdateRequired = true;
+}
+	
 		c.getItems().wearItem(c.wearId, c.wearSlot);
 		if (torvaChanged && c.playerLevel[3] > c.calculateMaxLifePoints()) {
 			c.playerLevel[3] = c.calculateMaxLifePoints();
 			c.getPA().refreshSkill(3);
 		}
+                
 	}
 
 }

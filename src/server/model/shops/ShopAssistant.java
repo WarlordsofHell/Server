@@ -25,6 +25,86 @@ public class ShopAssistant {
 		c.getPA().sendFrame248(3824, 3822);
 		c.getPA().sendFrame126(Server.shopHandler.ShopName[ShopID], 3901);
 	}
+        	/**
+	*@Author Linus - Herpus Derpus
+	**/
+	public int getPrestigeItemValue(int id) {
+		switch (id) {
+			case 11694:
+			return 4200;
+			case 11696:
+			case 11698:
+			case 11700:
+			return 2600;
+			
+			case 11938:
+			return 1000;
+			
+			case 18778:
+			return 600;
+			
+			case 19311:
+			return 1100;
+			
+			case 19335:
+			case 20072:
+			return 900;
+			
+			case 9470:
+			case 9472:
+			return 400;
+			
+			case 13362:
+			case 13358:
+			case 13360:
+			return 3000;
+			
+			case 11858:
+			case 11860:
+			case 11862:
+			return 6000;
+			
+			
+			case 11846:
+			case 11848:
+			case 11850:
+			case 11852:
+			case 11854:
+			case 11856:
+			return 700;
+			
+			case 5698:
+			case 5699:
+			return 100;
+			
+			case 14484:
+			return 4200;
+			
+			
+			case 4151:
+			return 500;
+			
+			case 2441:
+			case 2435:
+			case 2429:
+			return 25;
+			
+			case 19336:
+			case 19337:
+			case 19338:
+			case 19339:
+			case 19340:
+			return 500;
+			
+			case 6731:
+			case 6733:
+			case 6735:
+			case 6737:
+			return 350;
+			
+		}
+		return 0;
+	}
 	
 	public void updatePlayerShop() {
 		for (int i = 1; i < Config.MAX_PLAYERS; i++) {
@@ -127,6 +207,14 @@ public class ShopAssistant {
 		int ShopValue = (int)Math.floor(getItemShopValue(removeId, 0, removeSlot));
 		ShopValue *= 1.15;
 		String ShopAdd = "";
+                		if (c.myShopId > 19 && c.myShopId < 30){
+			c.sendMessage("This item current costs " + getPrestigeItemValue(removeId) + " Prestige Points.");
+			return;		
+		}
+                                		if (c.myShopId > 19 && c.myShopId < 30){
+			c.sendMessage("This item current costs " + getPrestigeItemValue(removeId) + " Prestige Points.");
+			return;		
+		}
 		if (c.myShopId >= 17) {
 			c.sendMessage(c.getItems().getItemName(removeId)+": currently costs " + getSpecialItemValue(removeId) + " Soul Split points.");
 			return;
@@ -370,7 +458,10 @@ public class ShopAssistant {
 			int Slot1 = 0;//Tokkul
 			int Slot2 = 0;//Pking Points
 			int Slot3 = 0;//Donator Gold
-
+			if (c.myShopId >= 20 && c.myShopId <= 29) { //prestige point shops
+				handleOtherShop(itemID);
+				return false;
+			}
 			if (c.myShopId >= 17) {
 				handleOtherShop(itemID);
 				return false;
@@ -487,7 +578,18 @@ public class ShopAssistant {
 	}	
 	
 		public void handleOtherShop(int itemID) {
-
+			if (c.myShopId > 19 && c.myShopId < 30){
+                if (c.prestigePoint >= getPrestigeItemValue(itemID)) {
+					if (c.getItems().freeSlots() > 0) {
+						c.prestigePoint -= getPrestigeItemValue(itemID);
+						c.getItems().addItem(itemID,1);
+						c.getItems().resetItems(3823);
+						c.sendMessage("Sucess!");
+					}
+				} else {
+					c.sendMessage("You do not have enough Prestige Points to buy this item.");			
+				}
+			}
 			if (c.myShopId == 18) {
 				if (c.pcPoints >= getSpecialItemValue(itemID)) {
 					if (c.getItems().freeSlots() > 0){

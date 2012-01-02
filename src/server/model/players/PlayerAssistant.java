@@ -4,14 +4,17 @@ import server.Config;
 import server.Server;
 import server.model.npcs.NPCHandler;
 import server.util.Misc;
-import server.world.map.*;
 import java.util.Properties;
-import server.model.players.PlayerSave;
 import java.io.*;
 import java.util.GregorianCalendar;
 import java.util.Calendar;
-import server.model.players.PathFinder;
-import server.model.players.Hit.CombatType;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 
 
 public class PlayerAssistant{
@@ -63,7 +66,119 @@ public class PlayerAssistant{
 		else
 			return "AM";
 	}
+		public void setPrestigeReward(){
+	/**
+	*@Author Linus
+	**/
+		if(c.prestige < 10){
+			c.sendMessage("You have unlocked new Rewards!");
+			c.sendMessage("Your new prestige level is: "+ c.prestige);
+			c.sendMessage(" ");
+			
+			if(c.prestige < 5){
+				c.prestigePoint += 500;
+				c.sendMessage("You have gained 500 prestige points!");
+				return;
+			}
+			if(c.prestige == 5){
+				c.prestigePoint += 1200;
+				c.sendMessage("You have gained 1000 prestige points!");
+				c.sendMessage("You have gained an extra of 200 points for prestigeing 5 times!");
+				return;
+			}
+			if(c.prestige > 5 && c.prestige < 8){
+				c.prestigePoint += 1000;
+				c.sendMessage("You have gained 1000 prestige points!");
+				return;		
+			}
+			if(c.prestige > 7 && c.prestige < 10){
+				c.prestigePoint += 1300;
+				c.sendMessage("You have gained 1300 prestige points!");
+				return;		
+			}
+			
+		} else {
+			c.sendMessage("You are already prestige 10, which is max prestige!");
+			c.prestigePoint += 1600;
+			c.sendMessage("You have gained 1600 prestige points!");
+			c.prestige = 10;
+			return;
+		}
+	}
+                	public boolean checkDisplayName(String name) {
+	try {
+		File list = new File("./Data/displaynames.txt");
+		FileReader read = new FileReader(list);
+		BufferedReader reader = new BufferedReader(read);
+		String line = null;
+			while ((line = reader.readLine()) != null) {
+				if (line.equalsIgnoreCase(name)) {
+				return true;
+				}
+			}
+			reader.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
 	
+
+	
+	public void createDisplayName(String name) {
+		BufferedWriter names = null;
+		try {
+			names = new BufferedWriter(new FileWriter("./Data/displaynames.txt", true));
+			names.write(name);
+			names.newLine();
+			names.flush();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			if (names != null) {
+				try {
+					names.close();
+				} catch (IOException e2) {
+				}
+			}
+		}
+	}
+
+public boolean playerNameExists(String name) {
+	try {
+	File names = new File("./Data/characters/"+name+".txt");
+		if (names.exists()) {
+		return true;
+		}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+                	public void resetLevels(){
+				c.playerXP[0] = getXPForLevel(1)+5;
+				c.playerXP[1] = getXPForLevel(1)+5;
+				c.playerXP[2] = getXPForLevel(1)+5;
+				c.playerXP[3] = getXPForLevel(10)+5;
+				c.playerXP[4] = getXPForLevel(1)+5;
+				c.playerXP[5] = getXPForLevel(1)+5;
+				c.playerXP[6] = getXPForLevel(1)+5;
+				c.playerLevel[0] = getLevelForXP(c.playerXP[0]);
+				c.playerLevel[1] = getLevelForXP(c.playerXP[1]);
+				c.playerLevel[2] = getLevelForXP(c.playerXP[2]);
+				c.playerLevel[3] = getLevelForXP(c.playerXP[3]);
+				c.playerLevel[4] = getLevelForXP(c.playerXP[4]);
+				c.playerLevel[5] = getLevelForXP(c.playerXP[5]);
+				c.playerLevel[6] = getLevelForXP(c.playerXP[6]);
+				refreshSkill(0);	
+				refreshSkill(1);	
+				refreshSkill(2);	
+				refreshSkill(3);	
+				refreshSkill(4);	
+				refreshSkill(5);	
+				refreshSkill(6);		
+				return;
+	}
 	public void checkDateAndTime()
 	{
 		Calendar cal = new GregorianCalendar();	
@@ -450,13 +565,16 @@ public class PlayerAssistant{
 	}
 	
 	public void closeAllWindows() {
-		synchronized(c) {
-			if(c.getOutStream() != null && c != null) {
-				c.getOutStream().createFrame(219);
-				c.flushOutStream();
-				c.isBanking = false;
-			}
+		if (c.getOutStream() != null && c != null) {
+			c.getOutStream().createFrame(219);
+			c.flushOutStream();
+			c.isBanking = false;
+			c.getTradeAndDuel().declineTrade();
 		}
+	}
+      public void changeToSidebar(int i1) {
+		c.outStream.createFrame(106);
+		c.outStream.writeByteC(i1);
 	}
 	
 	public void sendFrame34(int id, int slot, int column, int amount) {
@@ -1771,149 +1889,52 @@ public void castVeng() {
 	}
 	
 	public void levelUp(int skill) {
-		int totalLevel = (getLevelForXP(c.playerXP[0]) + getLevelForXP(c.playerXP[1]) + getLevelForXP(c.playerXP[2]) + getLevelForXP(c.playerXP[3]) + getLevelForXP(c.playerXP[4]) + getLevelForXP(c.playerXP[5]) + getLevelForXP(c.playerXP[6]) + getLevelForXP(c.playerXP[7]) + getLevelForXP(c.playerXP[8]) + getLevelForXP(c.playerXP[9]) + getLevelForXP(c.playerXP[10]) + getLevelForXP(c.playerXP[11]) + getLevelForXP(c.playerXP[12]) + getLevelForXP(c.playerXP[13]) + getLevelForXP(c.playerXP[14]) + getLevelForXP(c.playerXP[15]) + getLevelForXP(c.playerXP[16]) + getLevelForXP(c.playerXP[17]) + getLevelForXP(c.playerXP[18]) + getLevelForXP(c.playerXP[19]) + getLevelForXP(c.playerXP[20]));
-		sendFrame126("Total Lvl: "+totalLevel, 3984);
-		switch(skill) {
-			case 0:
-			sendFrame126("Congratulations, you just advanced an attack level!", 6248);
-			sendFrame126("Your attack level is now "+getLevelForXP(c.playerXP[skill])+".", 6249);
-			c.sendMessage("Congratulations, you just advanced an attack level.");	
-			sendFrame164(6247);
-			break;
-			
-			case 1:
-            sendFrame126("Congratulations, you just advanced a defence level!", 6254);
-            sendFrame126("Your defence level is now "+getLevelForXP(c.playerXP[skill])+".", 6255);
-            c.sendMessage("Congratulations, you just advanced a defence level.");
-			sendFrame164(6253);
-			break;
-			
-			case 2:
-            sendFrame126("Congratulations, you just advanced a strength level!", 6207);
-            sendFrame126("Your strength level is now "+getLevelForXP(c.playerXP[skill])+".", 6208);
-            c.sendMessage("Congratulations, you just advanced a strength level.");
-			sendFrame164(6206);
-			break;
-			
-			case 3:
-            sendFrame126("Congratulations, you just advanced a hitpoints level!", 6217);
-            sendFrame126("Your hitpoints level is now "+getLevelForXP(c.playerXP[skill])+".", 6218);
-            c.sendMessage("Congratulations, you just advanced a hitpoints level.");
-			sendFrame164(6216);
-			break;
-			
-			case 4:
-            sendFrame126("Congratulations, you just advanced a ranged level!", 5453);
-            sendFrame126("Your ranged level is now "+getLevelForXP(c.playerXP[skill])+".", 6114);
-            c.sendMessage("Congratulations, you just advanced a ranging level.");
-			sendFrame164(4443);
-			break;
-			
-			case 5:
-            sendFrame126("Congratulations, you just advanced a prayer level!", 6243);
-            sendFrame126("Your prayer level is now "+getLevelForXP(c.playerXP[skill])+".", 6244);
-            c.sendMessage("Congratulations, you just advanced a prayer level.");
-			sendFrame164(6242);
-			break;
-			
-			case 6:
-            sendFrame126("Congratulations, you just advanced a magic level!", 6212);
-            sendFrame126("Your magic level is now "+getLevelForXP(c.playerXP[skill])+".", 6213);
-            c.sendMessage("Congratulations, you just advanced a magic level.");
-			sendFrame164(6211);
-			break;
-			
-			case 7:
-            sendFrame126("Congratulations, you just advanced a cooking level!", 6227);
-            sendFrame126("Your cooking level is now "+getLevelForXP(c.playerXP[skill])+".", 6228);
-            c.sendMessage("Congratulations, you just advanced a cooking level.");
-			sendFrame164(6226);
-			break;
-			
-			case 8:
-			sendFrame126("Congratulations, you just advanced a woodcutting level!", 4273);
-			sendFrame126("Your woodcutting level is now "+getLevelForXP(c.playerXP[skill])+".", 4274);
-			c.sendMessage("Congratulations, you just advanced a woodcutting level.");
-			sendFrame164(4272);
-            break;
-			
-            case 9:
-            sendFrame126("Congratulations, you just advanced a fletching level!", 6232);
-            sendFrame126("Your fletching level is now "+getLevelForXP(c.playerXP[skill])+".", 6233);
-            c.sendMessage("Congratulations, you just advanced a fletching level.");
-			sendFrame164(6231);
-            break;
-			
-			case 10:
-            sendFrame126("Congratulations, you just advanced a fishing level!", 6259);
-            sendFrame126("Your fishing level is now "+getLevelForXP(c.playerXP[skill])+".", 6260);
-            c.sendMessage("Congratulations, you just advanced a fishing level.");
-			sendFrame164(6258);
-			break;
-			
-			case 11:
-			sendFrame126("Congratulations, you just advanced a fire making level!", 4283);
-			sendFrame126("Your firemaking level is now "+getLevelForXP(c.playerXP[skill])+".", 4284);
-			c.sendMessage("Congratulations, you just advanced a fire making level.");
-			sendFrame164(4282);
-            break;
-			
-            case 12:
-			sendFrame126("Congratulations, you just advanced a crafting level!", 6264);
-			sendFrame126("Your crafting level is now "+getLevelForXP(c.playerXP[skill])+".", 6265);
-			c.sendMessage("Congratulations, you just advanced a crafting level.");
-			sendFrame164(6263);
-            break;
-			
-			case 13:
-			sendFrame126("Congratulations, you just advanced a smithing level!", 6222);
-			sendFrame126("Your smithing level is now "+getLevelForXP(c.playerXP[skill])+".", 6223);
-			c.sendMessage("Congratulations, you just advanced a smithing level.");
-			sendFrame164(6221);
-			break;
-			
-			case 14:
-			sendFrame126("Congratulations, you just advanced a mining level!", 4417);
-			sendFrame126("Your mining level is now "+getLevelForXP(c.playerXP[skill])+".", 4438);
-			c.sendMessage("Congratulations, you just advanced a mining level.");
-			sendFrame164(4416);
-            break;
-			
-			case 15:
-            sendFrame126("Congratulations, you just advanced a herblore level!", 6238);
-            sendFrame126("Your herblore level is now "+getLevelForXP(c.playerXP[skill])+".", 6239);
-            c.sendMessage("Congratulations, you just advanced a herblore level.");
-			sendFrame164(6237);
-            break;
-			
-			case 16:
-			sendFrame126("Congratulations, you just advanced a agility level!", 4278);
-			sendFrame126("Your agility level is now "+getLevelForXP(c.playerXP[skill])+".", 4279);
-			c.sendMessage("Congratulations, you just advanced an agility level.");
-			sendFrame164(4277);
-            break;
-			
-			case 17:
-			sendFrame126("Congratulations, you just advanced a thieving level!", 4263);
-			sendFrame126("Your theiving level is now "+getLevelForXP(c.playerXP[skill])+".", 4264);
-            c.sendMessage("Congratulations, you just advanced a thieving level.");
-			sendFrame164(4261);
-			break;
-			
-			case 18:
-			sendFrame126("Congratulations, you just advanced a slayer level!", 12123);
-			sendFrame126("Your slayer level is now "+getLevelForXP(c.playerXP[skill])+".", 12124);
-			c.sendMessage("Congratulations, you just advanced a slayer level.");
-			sendFrame164(12122);
-            break;
-            
-            case 20:
-			sendFrame126("Congratulations, you just advanced a runecrafting level!", 4268);
-			sendFrame126("Your runecrafting level is now "+getLevelForXP(c.playerXP[skill])+".", 4269);
-			c.sendMessage("Congratulations, you just advanced a runecrafting level.");
-			sendFrame164(4267);
-            break;
+		int totalLevel = 0;
+		for (int i = 0; i < 22; i++) {
+			totalLevel += (getLevelForXP(c.playerXP[i]));
 		}
+		sendFrame126("Level: " + totalLevel + 99 + 99, 13983);
+		int[][] data = { { 0, 6248, 6249, 6247 }, // ATTACK
+				{ 1, 6254, 6255, 6253 }, // DEFENCE
+				{ 2, 6207, 6208, 6206 }, // STRENGTH
+				{ 3, 6217, 6218, 6216 }, // HITPOINTS
+				{ 4, 5453, 6114, 4443 }, // RANGED
+				{ 5, 6243, 6244, 6242 }, // PRAYER
+				{ 6, 6212, 6213, 6211 }, // MAGIC
+				{ 7, 6227, 6228, 6226 }, // COOKING
+				{ 8, 4273, 4274, 4272 }, // WOODCUTTING
+				{ 9, 6232, 6233, 6231 }, // FLETCHING
+				{ 10, 6259, 6260, 6258 }, // FISHING
+				{ 11, 4283, 4284, 4282 }, // FIREMAKING
+				{ 12, 6264, 6265, 6263 }, // CRAFTING
+				{ 13, 6222, 6223, 6221 }, // SMITHING
+				{ 14, 4417, 4438, 4416 }, // MINING
+				{ 15, 6238, 6239, 6237 }, // HERBLORE
+				{ 16, 4278, 4279, 4277 }, // AGILITY
+				{ 17, 4263, 4264, 4261 }, // THIEVING
+				{ 18, 12123, 12124, 12122 }, // SLAYER
+				{ 19, -1, -1, -1 }, // FARMING
+				{ 20, 4268, 4269, 4267 }, // RUNECRAFTING
+		};
+		String[] name = { "Attack", "Defence", "Strength", "Hitpoints",
+				"Ranged", "Prayer", "Magic", "Cooking", "Woodcutting",
+				"Fletching", "Fishing", "Firemaking", "Crafting", "Smithing",
+				"Mining", "Herblore", "Agility", "Thieving", "Slayer",
+				"Farming", "Runecrafting", };
+		if (skill == data[skill][0]) {
+			sendFrame126("@bla@Congratulations, you just advanced a "
+					+ name[skill] + " level!", data[skill][1]);
+			sendFrame126("@dbl@Your " + name[skill] + " level is now "
+					+ getLevelForXP(c.playerXP[skill]) + ".", data[skill][2]);
+			c.sendMessage("You've just advanced a " + name[skill]
+					+ " level! You have reach level "
+					+ getLevelForXP(c.playerXP[skill]) + ".");
+			if (getLevelForXP(c.playerXP[skill]) == 99) {
+				c.sendMessage("<col=129>Well done! You've achieved the highest possible level in this skill!");
+			}
+			sendFrame164(data[skill][3]);
+		}
+		sendFrame126("Combat level: " + c.combatLevel, 3983);
 		c.dialogueAction = 0;
 		c.nextChat = 0;
 	}
@@ -2208,7 +2229,7 @@ public void castVeng() {
 	}
 	
 	public void resetVariables() {
-		c.getFishing().resetFishing();
+		//c.getFishing().resetFishing();
 		c.getCrafting().resetCrafting();
 		c.usingGlory = false;
 		c.smeltInterface = false;

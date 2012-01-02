@@ -4,13 +4,16 @@ import server.Config;
 import server.Server;
 import server.model.players.Client;
 import server.model.players.PacketType;
+import server.model.players.skills.Fishing;
 
 /**
  * Click NPC
  */
 public class ClickNPC implements PacketType {
 	public static final int ATTACK_NPC = 72, MAGE_NPC = 131, FIRST_CLICK = 155, SECOND_CLICK = 17, THIRD_CLICK = 21;
+         public int npcType;
 	@Override
+       
 	public void processPacket(Client c, int packetType, int packetSize) {
 		c.npcIndex = 0;
 		c.npcClickIndex = 0;
@@ -163,15 +166,22 @@ public class ClickNPC implements PacketType {
 			}
 	
 			break;
+                        
 			
+                            
 			case FIRST_CLICK:
 				c.npcClickIndex = c.inStream.readSignedWordBigEndian();
 				c.npcType = Server.npcHandler.npcs[c.npcClickIndex].npcType;
 				if(c.goodDistance(Server.npcHandler.npcs[c.npcClickIndex].getX(), Server.npcHandler.npcs[c.npcClickIndex].getY(), c.getX(), c.getY(), 1)) {
 					c.turnPlayerTo(Server.npcHandler.npcs[c.npcClickIndex].getX(), Server.npcHandler.npcs[c.npcClickIndex].getY());
-					Server.npcHandler.npcs[c.npcClickIndex].facePlayer(c.playerId);
-					c.getActions().firstClickNpc(c.npcType);	
-				} else {
+                                        if (Fishing.fishingNPC(c, npcType)) {
+                                            Fishing.fishingNPC(c, 1, npcType);
+                                           // return;
+                                        } else {
+                                           Server.npcHandler.npcs[c.npcClickIndex].facePlayer(c.playerId);
+					c.getActions().firstClickNpc(c.npcType);                                        
+                                        }
+                                           } else {
 					c.clickNpcType = 1;
 				}
 				break;
@@ -182,7 +192,11 @@ public class ClickNPC implements PacketType {
 				if(c.goodDistance(Server.npcHandler.npcs[c.npcClickIndex].getX(), Server.npcHandler.npcs[c.npcClickIndex].getY(), c.getX(), c.getY(), 1)) {
 					c.turnPlayerTo(Server.npcHandler.npcs[c.npcClickIndex].getX(), Server.npcHandler.npcs[c.npcClickIndex].getY());
 					Server.npcHandler.npcs[c.npcClickIndex].facePlayer(c.playerId);
-					c.getActions().secondClickNpc(c.npcType);	
+					c.getActions().secondClickNpc(c.npcType);
+                                                        if (Fishing.fishingNPC(c, npcType)) {
+			Fishing.fishingNPC(c, 2, npcType);
+			//return;
+		}
 				} else {
 					c.clickNpcType = 2;
 				}

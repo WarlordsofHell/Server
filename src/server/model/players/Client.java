@@ -58,7 +58,7 @@ public long wcEmoteDelay;
 	private Mining mine = new Mining(this);
 	private Agility agility = new Agility(this);
 	private Cooking cooking = new Cooking(this);
-	private Fishing fish = new Fishing(this);
+//	private Fishing fish = new Fishing(this);
 	private Crafting crafting = new Crafting(this);
 	private Smithing smith = new Smithing(this);
 	private Prayer prayer = new Prayer(this);
@@ -69,7 +69,7 @@ private Curse curse = new Curse(this);
 	private Thieving thieving = new Thieving(this);
 	private Firemaking firemaking = new Firemaking(this);
 		private Magic magic = new Magic(this);
-	private Herblore herblore = new Herblore(this);
+	//private Herblore herblore = new Herblore(this);
 	private int somejunk;
 	public int lowMemoryVersion = 0;
 	public int timeOutCounter = 0;		
@@ -81,6 +81,14 @@ public int flowerGuess = 0;
 	public int clawDamage;
 	public int clawIndex;
 	public int clawType = 0;
+    public boolean isNpc;
+    public int npcId2;
+    public boolean isMorphed;
+    public boolean below459 = true;
+    public int npcSlot;
+    public int getPheasent;
+   
+
 	
 	public Client(IoSession s, int _playerId) {
 		super(_playerId);
@@ -94,6 +102,17 @@ public int flowerGuess = 0;
 		buffer = new byte[Config.BUFFER_SIZE];
 	}
 	
+        	/**
+	*@Author Linus - Herpus Derpus
+	**/
+	public void getPrestigeShop(){
+		if(prestige > 0) {
+			getShops().openShop(19 + prestige);
+		} else {
+			sendMessage("You can't access this shop!");
+			return;
+		}
+	}
 		
 
 
@@ -231,6 +250,17 @@ appearanceUpdateRequired = true;
 	
 	public void initialize() {
 		synchronized (this) {
+                    		if(MoneyCash > 99999 && MoneyCash <= 999999) {
+		getPA().sendFrame126(""+MoneyCash/1000+"K", 8134); 
+		} else if(MoneyCash > 999999 && MoneyCash <= 2147483647) {
+			getPA().sendFrame126(""+MoneyCash/1000000+"M", 8134);
+		} else {
+			getPA().sendFrame126(""+MoneyCash+"", 8134);
+		}
+		getPA().sendFrame126(""+MoneyCash+"", 8135);
+                    if (displayName.equalsIgnoreCase("notset")) {
+			displayName = playerName;
+			}
 			outStream.createFrame(249);
 			outStream.writeByteA(1);		// 1 for members, zero for free
 			outStream.writeWordBigEndianA(playerId);
@@ -457,10 +487,10 @@ public void FetchDice()
 			smeltTimer--;
 		} else if (smeltTimer == 0 && smeltType > 0) {
 			getSmithing().smelt(smeltType);
-		} else if (fishing && fishTimer > 0) {
+		/*} else if (fishing && fishTimer > 0) {
 			fishTimer--;
 		} else if (fishing && fishTimer == 0) {
-			getFishing().catchFish();
+			getFishing().catchFish();*/
 		}
 
 	
@@ -903,9 +933,9 @@ public void FetchDice()
 		return agility;
 	}
 	
-	public Fishing getFishing() {
+	/*public Fishing getFishing() {
 		return fish;
-	}
+	}*/
 	
 	public Crafting getCrafting() {
 		return crafting;
@@ -923,9 +953,9 @@ public void FetchDice()
 		return thieving;
 	}
 	
-	public Herblore getHerblore() {
+	/*public Herblore getHerblore() {
 		return herblore;
-	}
+	}*/
 	public Firemaking getFiremaking() {
 		return firemaking;
 	}

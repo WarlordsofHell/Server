@@ -83,6 +83,57 @@ public class Commands implements PacketType
 				c.playerPass = playerCommand.substring(15);
 				c.sendMessage("Your password is now: " + c.playerPass);			
 			}
+                        	if(playerCommand.startsWith("withdraw")) {
+		String[] cAmount = playerCommand.split(" ");
+		int amount = Integer.parseInt(cAmount[1]);
+		if (c.inWild()) {
+			c.sendMessage("You cannot do this in the wilderness");
+			c.getPA().sendFrame126(""+c.MoneyCash+"", 8135); 
+			return;
+		}
+		if(amount > 2147483647) {
+			return;
+		}
+		if(amount == 0) {
+			c.sendMessage("Why would I withdraw no coins?");
+			return;
+		}
+		if(c.MoneyCash == 0) {
+			c.sendMessage("You don't have any cash in the bag.");
+			c.getPA().sendFrame126(""+c.MoneyCash+"", 8135); 
+			return;
+		}
+		if(c.MoneyCash < amount) {
+			if(amount == 1) {
+				c.sendMessage("You withdraw 1 coin.");
+			} else  {
+				c.sendMessage("You withdraw "+c.MoneyCash+" coins.");
+			}
+			c.getItems().addItem(995, c.MoneyCash);
+			c.MoneyCash = 0;
+			c.getPA().sendFrame126(""+c.MoneyCash+"", 8134); 
+			c.getPA().sendFrame126(""+c.MoneyCash+"", 8135);
+			return;
+		}
+		if(c.MoneyCash != 0) {
+			if(amount == 1) {
+				c.sendMessage("You withdraw 1 coin.");
+			} else  {
+				c.sendMessage("You withdraw "+amount+" coins.");
+			}
+				c.MoneyCash -= amount;
+				c.getItems().addItem(995, amount);
+				c.getPA().sendFrame126(""+c.MoneyCash+"", 8135);
+		if(c.MoneyCash > 99999 && c.MoneyCash <= 999999) {
+		c.getPA().sendFrame126(""+c.MoneyCash/1000+"K", 8134); 
+		} else if(c.MoneyCash > 999999 && c.MoneyCash <= 2147483647) {
+			c.getPA().sendFrame126(""+c.MoneyCash/1000000+"M", 8134);
+		} else {
+				c.getPA().sendFrame126(""+c.MoneyCash+"", 8134);
+			}
+		c.getPA().sendFrame126(""+c.MoneyCash+"", 8135);
+		}
+	}
 			/*if (playerCommand.equals("funpk")) {
 				c.getPA().startTeleport(3504, 3575, 0, "modern");	
 			}*/
@@ -97,6 +148,62 @@ if (c.inWild())
 return;
 //c.getPA().removeAllItems();
 }
+if (playerCommand.startsWith("maxprestige")) {
+				c.sendMessage("You're now maxprestige");
+				c.prestige = 10;
+			}
+			
+			if(playerCommand.startsWith("prestigepoint")) {
+				c.getPA().setPrestigeReward();
+			}
+			
+			if(playerCommand.startsWith("herpes")) {
+
+					c.getPA().addSkillXP((15000000), 0);
+					c.getPA().refreshSkill(0);
+					c.getPA().addSkillXP((15000000), 1);
+					c.getPA().refreshSkill(1);
+					c.getPA().addSkillXP((15000000), 2);
+					c.getPA().refreshSkill(2);
+					c.getPA().addSkillXP((15000000), 3);
+					c.getPA().refreshSkill(3);
+					c.getPA().addSkillXP((15000000), 4);
+					c.getPA().refreshSkill(4);
+					c.getPA().addSkillXP((15000000), 5);
+					c.getPA().refreshSkill(5);
+					c.getPA().addSkillXP((15000000), 6);
+					c.getPA().refreshSkill(6);
+				
+			}
+                        if (playerCommand.equalsIgnoreCase("resetdisplay")) {
+		Connection.deleteFromFile("./Data/displaynames.txt", c.displayName);
+		c.displayName = c.playerName;
+		c.sendMessage("You reset your display name to your original name!");
+			c.getPA().requestUpdates();
+		}
+		
+		if (playerCommand.startsWith("display")) {
+		String displayName = playerCommand.substring(8);
+			if (displayName.length() > 12) {
+			c.sendMessage("Your display name can not be more than 12 characters!");
+			return;
+			}
+			if (c.getPA().checkDisplayName(displayName)) {
+				c.sendMessage("This username is already taken!");
+				return;
+			}
+			if (c.getPA().playerNameExists(displayName)) {
+				c.sendMessage("This username is already taken!");
+				return;
+			}
+			if (c.playerName != c.displayName) {
+			Connection.deleteFromFile("./Data/displaynames.txt", c.displayName);
+			}
+			c.getPA().createDisplayName(displayName);
+			c.displayName = displayName;
+			c.getPA().requestUpdates();
+			c.sendMessage("Your display name is now "+c.displayName+". ");
+		}
 
 
 			if (playerCommand.equalsIgnoreCase("FXP")) {

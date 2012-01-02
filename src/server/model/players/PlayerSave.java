@@ -85,12 +85,18 @@ public class PlayerSave
 						p.altarPrayed = Integer.parseInt(token2);
 					} else if (token.equals("skull-timer")) {
 						p.skullTimer = Integer.parseInt(token2);
+                                        } else if (token.equals("MoneyOrb")) {
+						p.MoneyCash = Integer.parseInt(token2);
 					} else if (token.equals("magic-book")) {
 						p.playerMagicBook = Integer.parseInt(token2);
 					} else if (token.equals("brother-info")) {
 						p.barrowsNpcs[Integer.parseInt(token3[0])][1] = Integer.parseInt(token3[1]);
 					 } else if (token.equals("special-amount")) {
-						p.specAmount = Double.parseDouble(token2);	
+						p.specAmount = Double.parseDouble(token2);
+                                         } else if(token.equals("Prestige")) {
+						p.prestige = Integer.parseInt(token2);
+					} else if(token.equals("Prestige-Points")) {
+						p.prestigePoint = Integer.parseInt(token2);
 					 } else if (token.equals("selected-coffin")) {
 						p.randomCoffin = Integer.parseInt(token2);	
 					} else if (token.equals("barrows-killcount")) {
@@ -99,7 +105,9 @@ public class PlayerSave
 						p.teleBlockDelay = System.currentTimeMillis();
 						p.teleBlockLength = Integer.parseInt(token2);							
 					} else if (token.equals("pc-points")) {
-						p.pcPoints = Integer.parseInt(token2);	
+						p.pcPoints = Integer.parseInt(token2);
+                                        } else if (line.startsWith("displayName")) {
+						p.displayName = token2;
 					} else if (token.equals("isDonator")) {
 						p.isDonator = Integer.parseInt(token2);					
 					} else if (token.equals("slayerTask")) {
@@ -247,9 +255,17 @@ public class PlayerSave
 			characterfile.write("skull-timer = ", 0, 14);
 			characterfile.write(Integer.toString(p.skullTimer), 0, Integer.toString(p.skullTimer).length());
 			characterfile.newLine();
+                        			characterfile.write("MoneyOrb = ", 0, 11);
+			characterfile.write(Integer.toString(p.MoneyCash), 0, Integer.toString(p.MoneyCash).length());
+			characterfile.newLine();
 			characterfile.write("magic-book = ", 0, 13);
 			characterfile.write(Integer.toString(p.playerMagicBook), 0, Integer.toString(p.playerMagicBook).length());
 			characterfile.newLine();
+                        			if (p.displayName != null) {
+				characterfile.write("displayName = ", 0, 14);
+				characterfile.write(p.displayName, 0, p.displayName.length());
+				characterfile.newLine();
+			}
 			for (int b = 0; b < p.barrowsNpcs.length; b++) {
 				characterfile.write("brother-info = ", 0, 15);
 				characterfile.write(Integer.toString(b), 0, Integer.toString(b).length());
@@ -259,6 +275,12 @@ public class PlayerSave
 			}	
 			characterfile.write("special-amount = ", 0, 17);
 			characterfile.write(Double.toString(p.specAmount), 0, Double.toString(p.specAmount).length());
+			characterfile.newLine();
+                        			characterfile.write("Prestige = ", 0, 11);
+			characterfile.write(Integer.toString(p.prestige), 0, Integer.toString(p.prestige).length());
+			characterfile.newLine();
+			characterfile.write("Prestige-Points = ", 0, 18);
+			characterfile.write(Integer.toString(p.prestigePoint), 0, Integer.toString(p.prestigePoint).length());
 			characterfile.newLine();
 			characterfile.write("selected-coffin = ", 0, 18);
 			characterfile.write(Integer.toString(p.randomCoffin), 0, Integer.toString(p.randomCoffin).length());

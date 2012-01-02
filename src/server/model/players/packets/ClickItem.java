@@ -4,6 +4,7 @@ import server.model.players.Client;
 import server.Server;
 import server.model.players.content.teleporting.*;
 import server.model.players.PacketType;
+import server.model.players.skills.Herblore;
 
 
 /**
@@ -33,9 +34,10 @@ public class ClickItem implements PacketType {
 			c.getPA().fillPouch(pouch);
 			return;
 		}
-			c.getWoodcutting().HandleItemClick(itemId);			
-		if (c.getHerblore().isUnidHerb(itemId))
-			c.getHerblore().handleHerbClick(itemId);
+			c.getWoodcutting().HandleItemClick(itemId);	
+                        
+		if(Herblore.isHerb(c, itemId))
+			Herblore.cleanTheHerb(c, itemId);
 		if (c.getFood().isFood(itemId))
 			c.getFood().eat(itemId,itemSlot);
 		//ScriptManager.callFunc("itemClick_"+itemId, c, itemId, itemSlot);

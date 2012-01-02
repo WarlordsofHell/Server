@@ -102,7 +102,8 @@ public class Prayer {
 			c.startAnimation(altar ? 896 : 827);
 			c.sendMessage(altar ? "The gods are pleased with your offerings." : "You bury the bones.");
 			if(altar) {
-				c.getPA().createPlayersStillGfx(624, c.objectX, c.objectY, 0, 0);
+				//c.getPA().createPlayersStillGfx(624, c.objectX, c.objectY, 0, 0);
+				c.getPA().createPlayersStillGfx(624, 3097, 3500, 0, 0);
 			}
 		}
 	}

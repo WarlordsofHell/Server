@@ -1,8 +1,6 @@
 package server.model.players;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import server.Config;
@@ -11,14 +9,22 @@ import server.model.items.Item;
 import server.model.npcs.NPC;
 import server.model.npcs.NPCHandler;
 import server.model.players.Hit.CombatType;
-import server.model.players.Hit;
 import server.util.ISAACRandomGen;
 import server.util.Misc;
-import server.model.objects.Objects;
 import server.util.Stream;
 import server.world.map.*;
 
 public abstract class Player {
+    	/**
+	*@Author Linus - Herpus Derpus // Ints for Prestige :D
+	**/
+	public int
+	prestige = 0,
+	prestigePoint = 0,
+	prestigeChat = -1,
+	prestigeShops = 0;
+	public boolean 
+	prestigeMode = false;
 	//Custom Digging System
 	public long lastDig;
 	//End Custom Digging
@@ -28,8 +34,7 @@ public abstract class Player {
 	public int diceID = 15084;
 	public int cDice = 0;
 	//End Dicing
-	public Hit hitDiff2;
-	public Hit hitDiff;
+public int MoneyCash = 0;
 	public int altarPrayed = 0;
 	public boolean usingZMI;
 	public int hideId;
@@ -45,9 +50,7 @@ public abstract class Player {
 	public int soulSplitDelay = 0;
 	public boolean zerkOn = false;
 	public boolean Lattack = false;
-		public boolean isMining;
-	public boolean mining;
-	public int rockX, rockY;
+
 	public boolean Lranged = false;
 	public boolean Lmagic = false;
 	public boolean Ldefense = false;
@@ -55,14 +58,67 @@ public abstract class Player {
 	public boolean Lspecial = false;
 	public double getstr, getatt, getdef;
 	public double getranged, getmagic;
-		public boolean isWc;
+        //Combat
+        	public Hit hitDiff2;
+	public Hit hitDiff;
+        //End Combat
+        //Skills
+        public boolean stopPlayerSkill;
+        public boolean playerFletch, playerIsFletching, playerIsMining, playerIsFiremaking, playerIsFishing, playerIsCooking, playerIsWoodcutting;
+        public int[][] playerSkillProp = new int[20][15];
+	public boolean[] playerSkilling = new boolean[20];
+	public int[] woodcuttingProp = new int[10];
+	public int[] cookingProp = new int[7];
+	public int[] fishingProp = new int[13];
+	public int[] cookingCoords = new int[2];
+	public int[] miningProp = new int[6];
+	public int[] fletchingProp = new int[10];
+	public int[] smithingProp = new int [13];
+        //Woodcutting
+        public boolean isWc;
 	public boolean wcing;
 	public int treeX, treeY;
-
+        //End Woodcutting
+        //Fishing
+        public int FishID;
+        //End Fishing
+        //Mining
+        public boolean isMining;
+	public boolean mining;
+	public int rockX, rockY;
+        //End Mining
+        //Smithing
+                	public boolean amountToSmelt5;
+	public boolean amountToSmelt10;
+	public boolean amountToSmelt1;
+        public int doAmount;
+        //End Smithing
+        //Herblore
+        public boolean 
+	herbloreI = false,
+	secondHerb = false;
+        public int 	
+	herbAmount,
+	doingHerb,
+	newHerb,
+	newXp,
+	newItem;
+        //End Herblore
 	public long ignores[] = new long[200];
 	public boolean DCDamg = false;
 	public int DCdown = 0;
-	public int FishID;
+
+        
+        //Random Events
+        public boolean[] killedPheasant = new boolean[5];
+        public boolean inDrillEvent;
+	public boolean cantTeleport;
+	public boolean canLeaveArea;
+	public int correctDrill;
+	public int getRefreshment;
+        public int lastX;
+	public int lastY;
+        //End Random Events
 	//public int playerTitle;
 	public int cookedFishID;
 	public int CookingEmote;
@@ -132,6 +188,9 @@ public abstract class Player {
 	isBanking = false
 	;
 	private int loyaltyId;
+    public boolean maxed;
+    
+    
 
 public int getLoyaltyId() {
 	return loyaltyId;
@@ -140,7 +199,12 @@ public int getLoyaltyId() {
 public void setLoyaltyId(int loyaltyId) {
 	this.loyaltyId = loyaltyId;
 }
-
+	public void isMaxed(){
+		if(getLevelForXP(playerXP[0]) > 98 && getLevelForXP(playerXP[1]) > 98 && getLevelForXP(playerXP[2]) > 98 && getLevelForXP(playerXP[3]) > 98 && getLevelForXP(playerXP[4]) > 98 && getLevelForXP(playerXP[5]) > 98 && getLevelForXP(playerXP[6]) > 98){
+		System.out.println("Player is maxed");
+		maxed = true;
+		}
+	}
 	
 	public int
 	headIconHints, 
@@ -1298,7 +1362,8 @@ public void setLoyaltyId(int loyaltyId) {
 			playerProps.writeWord(playerTurn90CCWIndex);		// turn90CCWAnimIndex
 			playerProps.writeWord(playerRunIndex);		// runAnimIndex	
 	
-			playerProps.writeQWord(Misc.playerNameToInt64(playerName));
+			//playerProps.writeQWord(Misc.playerNameToInt64(playerName));
+                        playerProps.writeQWord(Misc.playerNameToInt64(displayName));
 	
 			int mag = (int) ((getLevelForXP(playerXP[6])) * 1.5);
 			int ran = (int) ((getLevelForXP(playerXP[4])) * 1.5);
@@ -1353,6 +1418,7 @@ public void setLoyaltyId(int loyaltyId) {
 	private byte chatTextSize = 0;
 	private int chatTextColor = 0;
 	private int chatTextEffects = 0;
+        public String displayName = "notset";
 	
 	protected void appendPlayerChatText(Stream str) {
 		synchronized(this) {

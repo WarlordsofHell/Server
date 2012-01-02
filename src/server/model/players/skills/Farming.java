@@ -6,7 +6,7 @@ import server.util.Misc;
 
 /**
  * Farming Class
- * @author Josh©
+ * author Joshï¿½
  * The class from the video, <3
  **/
 public class Farming {

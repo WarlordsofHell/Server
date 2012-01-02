@@ -41,7 +41,9 @@ public class Walking implements PacketType {
 			c.getTradeAndDuel().declineDuel();
 			return;
 		}
-		
+		if (c.isMorphed) {
+return;
+}
 		if(c.freezeTimer > 0) {
 			if(Server.playerHandler.players[c.playerIndex] != null) {
 				if(c.goodDistance(c.getX(), c.getY(), Server.playerHandler.players[c.playerIndex].getX(), Server.playerHandler.players[c.playerIndex].getY(), 1) && packetType != 98) {

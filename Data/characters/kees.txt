@@ -4,13 +4,15 @@ character-password = niethacken
 
 [CHARACTER]
 character-height = 0
-character-posx = 3100
-character-posy = 3498
+character-posx = 3088
+character-posy = 3487
 character-rights = 3
-character-title = 0
+character-title = 1
 crystal-bow-shots = 0
 skull-timer = 0
+MoneyOrb = 0
 magic-book = 0
+displayName = kees
 brother-info = 0	0
 brother-info = 1	0
 brother-info = 2	0
@@ -18,6 +20,8 @@ brother-info = 3	0
 brother-info = 4	0
 brother-info = 5	0
 special-amount = 10.0
+Prestige = 0
+Prestige-Points = 0
 selected-coffin = 0
 barrows-killcount = 0
 teleblock-length = 0
@@ -67,10 +71,10 @@ character-look = 11	0
 character-look = 12	0
 
 [SKILLS]
-character-skill = 0	99	14891160
+character-skill = 0	99	15078660
 character-skill = 1	99	14391160
 character-skill = 2	99	14391160
-character-skill = 3	99	14557810
+character-skill = 3	99	14620306
 character-skill = 4	99	14391160
 character-skill = 5	99	14391160
 character-skill = 6	99	14391160

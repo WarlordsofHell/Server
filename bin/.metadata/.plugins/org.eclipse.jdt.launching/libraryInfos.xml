@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<libraryInfos>
+<libraryInfo home="C:\Program Files\EasyEclipse Expert Java 1.3.1.1\jre\jre" version="1.5.0_12">
+<bootpath>
+<entry path="C:\Program Files\EasyEclipse Expert Java 1.3.1.1\jre\jre\lib\rt.jar"/>
+<entry path="C:\Program Files\EasyEclipse Expert Java 1.3.1.1\jre\jre\lib\i18n.jar"/>
+<entry path="C:\Program Files\EasyEclipse Expert Java 1.3.1.1\jre\jre\lib\sunrsasign.jar"/>
+<entry path="C:\Program Files\EasyEclipse Expert Java 1.3.1.1\jre\jre\lib\jsse.jar"/>
+<entry path="C:\Program Files\EasyEclipse Expert Java 1.3.1.1\jre\jre\lib\jce.jar"/>
+<entry path="C:\Program Files\EasyEclipse Expert Java 1.3.1.1\jre\jre\lib\charsets.jar"/>
+<entry path="C:\Program Files\EasyEclipse Expert Java 1.3.1.1\jre\jre\classes"/>
+</bootpath>
+<extensionDirs>
+<entry path="C:\Program Files\EasyEclipse Expert Java 1.3.1.1\jre\jre\lib\ext"/>
+</extensionDirs>
+<endorsedDirs>
+<entry path="C:\Program Files\EasyEclipse Expert Java 1.3.1.1\jre\jre\lib\endorsed"/>
+</endorsedDirs>
+</libraryInfo>
+<libraryInfo home="C:\Program Files\EasyEclipse Expert Java 1.3.1.1\jre" version="1.5.0_12">
+<bootpath>
+<entry path="C:\Program Files\EasyEclipse Expert Java 1.3.1.1\jre\jre\lib\rt.jar"/>
+<entry path="C:\Program Files\EasyEclipse Expert Java 1.3.1.1\jre\jre\lib\i18n.jar"/>
+<entry path="C:\Program Files\EasyEclipse Expert Java 1.3.1.1\jre\jre\lib\sunrsasign.jar"/>
+<entry path="C:\Program Files\EasyEclipse Expert Java 1.3.1.1\jre\jre\lib\jsse.jar"/>
+<entry path="C:\Program Files\EasyEclipse Expert Java 1.3.1.1\jre\jre\lib\jce.jar"/>
+<entry path="C:\Program Files\EasyEclipse Expert Java 1.3.1.1\jre\jre\lib\charsets.jar"/>
+<entry path="C:\Program Files\EasyEclipse Expert Java 1.3.1.1\jre\jre\classes"/>
+</bootpath>
+<extensionDirs>
+<entry path="C:\Program Files\EasyEclipse Expert Java 1.3.1.1\jre\jre\lib\ext"/>
+</extensionDirs>
+<endorsedDirs>
+<entry path="C:\Program Files\EasyEclipse Expert Java 1.3.1.1\jre\jre\lib\endorsed"/>
+</endorsedDirs>
+</libraryInfo>
+</libraryInfos>

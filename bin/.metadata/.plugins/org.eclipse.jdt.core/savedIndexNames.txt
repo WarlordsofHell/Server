@@ -1,0 +1,10 @@
+INDEX VERSION 1.121+C:\Users\Bas van Driel\Runescape Private Servers\WtfUZerkClients\Server\SoulSplit Source\.metadata\.plugins\org.eclipse.jdt.core
+2893246907.index
+479878962.index
+818009949.index
+2862998710.index
+3232767236.index
+222301326.index
+1387045899.index
+646284113.index
+523763640.index

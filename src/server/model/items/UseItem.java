@@ -3,6 +3,7 @@ package server.model.items;
 import server.model.players.Client;
 import server.util.Misc;
 import server.Config;
+import server.model.players.skills.Herblore;
 
 /**
  * 
@@ -42,8 +43,10 @@ case 8151:
 	}
 
 	public static void ItemonItem(Client c, int itemUsed, int useWith) {
-		if (itemUsed == 227 || useWith == 227)
-			c.getHerblore().handlePotMaking(itemUsed,useWith);
+                if(Herblore.mixPotion(c, itemUsed, useWith))
+			Herblore.setUpUnfinished(c, itemUsed, useWith);
+		if(Herblore.mixPotionNew(c, itemUsed, useWith))
+			Herblore.setUpPotion(c, itemUsed, useWith);
 		if (c.getItems().getItemName(itemUsed).contains("(") && c.getItems().getItemName(useWith).contains("("))
 			c.getPotMixing().mixPotion2(itemUsed, useWith);
 		if (itemUsed == 1733 || useWith == 1733)

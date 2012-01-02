@@ -7,9 +7,9 @@ import server.Server;
  * @author Sanity
  */
 
-public class PestControl {
+public class CorperalBeast {
 	
-	public PestControl() {
+	public CorperalBeast() {
 		
 	}
 	

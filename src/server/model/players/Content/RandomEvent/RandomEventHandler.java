@@ -1,6 +1,5 @@
 package server.model.players.content.RandomEvent;
 
-import server.Config;
 import server.Server;
 import server.event.CycleEvent;
 import server.event.CycleEventContainer;

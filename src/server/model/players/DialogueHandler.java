@@ -16,6 +16,57 @@ public class DialogueHandler {
 	public void sendDialogues(int dialogue, int npcId) {
 		c.talkingNpc = npcId;
 		switch(dialogue) {
+                    	/**
+	*@Author Linus - Herpus Derpus
+	**/
+		case 35:
+			sendNpcChat4("", "Hello there!", "I am the master of prestiges!", "Do you wish to prestige?", c.talkingNpc, "Arhein");
+			c.nextChat = 36;
+		break;
+		case 36:
+			sendOption4("What is Prestige?", "What is my current prestige level?", "Yes, I would like to prestige!", "Can I see your Prestige store please?");
+			c.prestigeChat = 1;
+		break;
+		case 37:
+			sendNpcChat4("Prestige is a rank that you can earn", "from maxing out all your combat stats!", "Theese include: Attack, Hitpoints, Strength", "Defence, Ranged, Prayer and Magic!", c.talkingNpc, "Arhein");
+			c.nextChat = 36;			
+		break;
+		case 38:
+			sendNpcChat4("", "Your current prestige level is", ""+ c.prestige, "", c.talkingNpc, "Arhein");
+			c.nextChat = 36;
+		break;
+		case 39:
+			c.isMaxed();
+			if(c.maxed){
+				for (int j = 0; j < c.playerEquipment.length; j++) {
+					if (c.playerEquipment[j] > 0) {
+						c.sendMessage("You cannot prestige if you have any equipment on you!");
+						c.getPA().removeAllWindows();
+						return;
+					}
+				}
+				
+				// start of level resetting! gfx 142 546
+				c.getPA().resetLevels();
+				c.gfx0(142);
+				c.startAnimation(546);	
+				if(c.prestige < 10){
+				c.prestige++;
+				}
+				c.maxed = false;
+				if(c.prestige == 10){
+				sendNpcChat4("You have now prestiged!", "You're also max prestiged. Your current prestige is: ", +c.prestige+"", "", c.talkingNpc, "Arhein");
+				} else {
+				sendNpcChat4("You have now prestiged!", "Your current prestige is: ", +c.prestige+"", "", c.talkingNpc, "Arhein");
+				}
+				c.nextChat = -1;
+				c.getPA().setPrestigeReward();
+				c.prestigeChat = -1;
+				return;
+			} else {
+				c.sendMessage("You need 99 in all combat stats before prestigeing.");
+			}
+		break;
 		case 20:
 			sendOption4("Information", "Black Jack","Five", "Maybe later...");
 			c.dialogueAction = 100;
@@ -187,6 +238,13 @@ break;
 		c.getPA().sendFrame126(text2, 6183);
 		c.getPA().sendFrame126(text3, 6184);
 		c.getPA().sendFrame164(6179);
+	}
+        	public static void sendNpcChat(Client c, String s, int ChatNpc, String name) {
+		c.getPA().sendFrame200(4883, 591);
+		c.getPA().sendFrame126(name, 4884);
+		c.getPA().sendFrame126(s, 4885);
+		c.getPA().sendFrame75(ChatNpc, 4883);
+		c.getPA().sendFrame164(4882);
 	}
 	
 	/*

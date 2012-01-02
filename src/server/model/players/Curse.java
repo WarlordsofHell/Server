@@ -112,21 +112,21 @@ public class Curse {
 					//case 1:
 					case 10:
 						if (c.curseActive[i] == false) {
-							atkCurse(i); // FUNKAR LÅT VA!
+							atkCurse(i); // FUNKAR LT VA!
 						}
 					break;
 					
 					case 2:
 					case 11:
 						if (c.curseActive[i] == false) {
-							rngCurse(i); // FUNKAR!! LÅT VA!!!
+							rngCurse(i); // FUNKAR!! LT VA!!!
 						}
 					break;
 					
 					case 3:
 					case 12:
 						if (c.curseActive[i] == false) {
-							mgeCurse(i); // FUNKAR LÅT STÅ!
+							mgeCurse(i); // FUNKAR LT ST!
 						}
 					break;
 					

@@ -6,6 +6,9 @@ import server.model.items.GameItem;
 import server.model.players.Client;
 import server.model.players.SkillMenu;
 import server.model.players.PacketType;
+import server.model.players.skills.Herblore;
+import server.model.players.skills.SkillGuides;
+import server.model.players.skills.Smithing;
 import server.util.Misc;
 
 /**
@@ -42,7 +45,36 @@ public class ClickingButtons implements PacketType {
 				else 
 					c.autoRet = 0;
 			break;
-
+case 23132: //unmorph
+                c.isMorphed = false;
+		c.setSidebarInterface(1, 3917);
+		c.setSidebarInterface(2, 638);
+		c.setSidebarInterface(3, 3213);
+		c.setSidebarInterface(4, 1644);
+		c.setSidebarInterface(5, 5608);
+			if(c.playerMagicBook == 0) {
+				c.setSidebarInterface(6, 1151);
+			} else if (c.playerMagicBook == 1) {
+				c.setSidebarInterface(6, 12855);
+			} else if (c.playerMagicBook == 2) {
+				c.setSidebarInterface(6, 29999);
+			}
+		c.setSidebarInterface(7, 18128);
+		c.setSidebarInterface(8, 5065);
+		c.setSidebarInterface(9, 5715); 
+		c.setSidebarInterface(10, 2449);
+		c.setSidebarInterface(11, 904);
+		c.setSidebarInterface(12, 147);
+		c.setSidebarInterface(13, 962);
+		c.setSidebarInterface(0, 2423);
+if (c.playerEquipment[c.playerRing] == 7927) {
+c.getItems().deleteEquipment(c.playerEquipment[c.playerRing], c.playerRing);
+c.getItems().addItem(7927,1);
+}
+c.isNpc = false;
+c.updateRequired = true;
+c.appearanceUpdateRequired = true;
+break;
 			//1st tele option
 			case 9190:
 			if (c.dialogueAction == 106) {
@@ -302,6 +334,30 @@ public class ClickingButtons implements PacketType {
 				}
 			break;
 			
+			case 15146:
+				if (c.smeltInterface) {
+					c.smeltType = 2349;
+					c.smeltAmount = 5;
+					c.getSmithing().startSmelting(c.smeltType);
+				}
+			break;
+			
+			case 15247:
+				if (c.smeltInterface) {
+					c.smeltType = 2349;
+					c.smeltAmount = 10;
+					c.getSmithing().startSmelting(c.smeltType);
+				}
+			break;
+			
+			case 9110:
+				if (c.smeltInterface) {
+					c.smeltType = 2349;
+					c.smeltAmount = 28;
+					c.getSmithing().startSmelting(c.smeltType);
+				}
+			break;
+			
 			case 15151:
 				if (c.smeltInterface) {
 					c.smeltType = 2351;
@@ -310,6 +366,29 @@ public class ClickingButtons implements PacketType {
 				}
 			break;
 			
+			case 15149:
+				if (c.smeltInterface) {
+					c.smeltType = 2351;
+					c.smeltAmount = 10;
+					c.getSmithing().startSmelting(c.smeltType);
+				}
+			break;
+			
+			case 15150:
+				if (c.smeltInterface) {
+					c.smeltType = 2351;
+					c.smeltAmount = 5;
+					c.getSmithing().startSmelting(c.smeltType);
+				}
+			break;
+			
+			case 15148:
+				if (c.smeltInterface) {
+					c.smeltType = 2351;
+					c.smeltAmount = 28;
+					c.getSmithing().startSmelting(c.smeltType);
+				}
+			break;
 			
 			case 15159:
 				if (c.smeltInterface) {
@@ -319,6 +398,29 @@ public class ClickingButtons implements PacketType {
 				}
 			break;
 			
+			case 15158:
+				if (c.smeltInterface) {
+					c.smeltType = 2353;
+					c.smeltAmount = 5;
+					c.getSmithing().startSmelting(c.smeltType);
+				}
+			break;
+			
+			case 15157:
+				if (c.smeltInterface) {
+					c.smeltType = 2353;
+					c.smeltAmount = 10;
+					c.getSmithing().startSmelting(c.smeltType);
+				}
+			break;
+			
+			case 15156:
+				if (c.smeltInterface) {
+					c.smeltType = 2353;
+					c.smeltAmount = 28;
+					c.getSmithing().startSmelting(c.smeltType);
+				}
+			break;
 			
 			case 29017:
 				if (c.smeltInterface) {
@@ -328,6 +430,29 @@ public class ClickingButtons implements PacketType {
 				}
 			break;
 			
+			case 29016:
+				if (c.smeltInterface) {
+					c.smeltType = 2359;
+					c.smeltAmount = 5;
+					c.getSmithing().startSmelting(c.smeltType);
+				}
+			break;
+			
+			case 24253:
+				if (c.smeltInterface) {
+					c.smeltType = 2359;
+					c.smeltAmount = 10;
+					c.getSmithing().startSmelting(c.smeltType);
+				}
+			break;
+			
+			case 16062:
+				if (c.smeltInterface) {
+					c.smeltType = 2359;
+					c.smeltAmount = 28;
+					c.getSmithing().startSmelting(c.smeltType);
+				}
+			break;
 			case 29022:
 				if (c.smeltInterface) {
 					c.smeltType = 2361;
@@ -335,13 +460,161 @@ public class ClickingButtons implements PacketType {
 					c.getSmithing().startSmelting(c.smeltType);
 				}
 			break;
-			
+
+			case 29020:
+				if (c.smeltInterface) {
+					c.smeltType = 2361;
+					c.smeltAmount = 5;
+					c.getSmithing().startSmelting(c.smeltType);
+				}
+			break;
+			case 29019:
+				if (c.smeltInterface) {
+					c.smeltType = 2361;
+					c.smeltAmount = 10;
+					c.getSmithing().startSmelting(c.smeltType);
+				}
+			break;
+			case 29018:
+				if (c.smeltInterface) {
+					c.smeltType = 2361;
+					c.smeltAmount = 28;
+					c.getSmithing().startSmelting(c.smeltType);
+				}
+			break;
 			case 29026:
 				if (c.smeltInterface) {
 					c.smeltType = 2363;
 					c.smeltAmount = 1;
 					c.getSmithing().startSmelting(c.smeltType);
 				}
+			break;
+			
+			case 29025:
+				if (c.smeltInterface) {
+					c.smeltType = 2363;
+					c.smeltAmount = 5;
+					c.getSmithing().startSmelting(c.smeltType);
+				}
+				
+			case 29024:
+				if (c.smeltInterface) {
+					c.smeltType = 2363;
+					c.smeltAmount = 10;
+					c.getSmithing().startSmelting(c.smeltType);
+				}
+				
+			case 29023:
+				if (c.smeltInterface) {
+					c.smeltType = 2363;
+					c.smeltAmount = 28;
+					c.getSmithing().startSmelting(c.smeltType);
+				}
+                            		case 10239:
+			if (!c.secondHerb) {
+				Herblore.finishUnfinished(c, 1);
+			} else {
+				Herblore.finishPotion(c, 1);
+			}
+			break;
+		case 10238:
+			if (c.secondHerb) {
+				Herblore.finishPotion(c, 5);
+			} else {
+				Herblore.finishUnfinished(c, 5);
+			}
+			break;
+		case 6212:
+			if (c.secondHerb) {
+				Herblore.finishPotion(c, c.getItems().getItemAmount(c.newItem));
+			} else {
+				Herblore.finishUnfinished(c,
+						c.getItems().getItemAmount(c.doingHerb));
+			}
+			break;
+		case 6211:
+			if (c.secondHerb) {
+				Herblore.finishPotion(c, c.getItems().getItemAmount(c.newItem));
+			} else {
+				Herblore.finishUnfinished(c,
+						c.getItems().getItemAmount(c.doingHerb));
+			}
+			break;
+		case 33206:// Attack button
+		case 34142:
+			SkillGuides.atkInterface(c);
+			break;
+		case 33209:// str button
+		case 34119:
+			SkillGuides.strInterface(c);
+			break;
+		case 33212: //Defence
+		case 34120:
+			SkillGuides.defInterface(c);
+			break;
+		case 34133:
+		case 33215: //Range
+			SkillGuides.rangeInterface(c);
+			break;
+		case 34123:
+		case 33207: //Hitpoints
+			//SkillGuides.hpInterface(c);
+			break;
+		case 34139:
+		case 33218: //Prayer 
+			SkillGuides.prayInterface(c);
+			break;
+		case 34136:
+		case 33221: //Magic
+			SkillGuides.mageInterface(c);
+			break;
+		case 34155:
+		case 33224: //Runecrafting
+			SkillGuides.rcInterface(c);
+			break;
+		case 34158:
+		case 33210: //Agility
+			SkillGuides.agilityInterface(c);
+			break;
+		case 34161:
+		case 33213: //Herblore
+			SkillGuides.herbloreInterface(c);
+			break;
+		case 59199:
+		case 33216: //Theiving
+			SkillGuides.thievingInterface(c);
+			break;	
+		case 59202:
+		case 33219: //craft
+			SkillGuides.craftingInterface(c);
+			break;	
+		case 33222: //Fletching
+			SkillGuides.fletchingInterface(c);
+			break;	
+		case 59205: 
+		case 47130: //Slayer
+			SkillGuides.slayerInterface(c);
+			break;	
+		case 33208: //Mining
+			SkillGuides.miningInterface(c);
+			break;	
+		case 33211: //Smithing
+			SkillGuides.smithingInterface(c);
+			break;	
+		case 33214: //Fishing
+			SkillGuides.fishingInterface(c);
+			break;	
+		case 33217: //Cooking
+			SkillGuides.cookingInterface(c);
+			break;	
+		case 33220: //Firemaking
+			SkillGuides.firemakingInterface(c);
+			break;	
+		case 33223: //Woodcutting
+			SkillGuides.woodcuttingInterface(c);
+			break;	
+		case 54104: //Farming
+			SkillGuides.farmingInterface(c);
 			break;
 			case 58253:
 			//c.getPA().showInterface(15106);
@@ -384,6 +657,11 @@ public class ClickingButtons implements PacketType {
 					c.getPA().startTeleport(Config.EDGEVILLE_X, Config.EDGEVILLE_Y, 0, "modern");
 				if (c.dialogueAction == 2)
 					c.getPA().startTeleport(3428, 3538, 0, "modern");
+                                if(c.prestigeChat == 1){
+					c.dialogueId = 37;
+					c.getDH().sendDialogues(c.dialogueId, 0);
+					return;
+				}
 				if (c.dialogueAction == 3)		
 					c.getPA().startTeleport(Config.EDGEVILLE_X, Config.EDGEVILLE_Y, 0, "modern");
 				if (c.dialogueAction == 4)
@@ -405,6 +683,11 @@ public class ClickingButtons implements PacketType {
 				}
 				if (c.usingGlory)
 					c.getPA().startTeleport(Config.AL_KHARID_X, Config.AL_KHARID_Y, 0, "modern");
+                                if(c.prestigeChat == 1){
+					c.dialogueId = 38;
+					c.getDH().sendDialogues(c.dialogueId, 0);
+					return;
+				}
 				if (c.dialogueAction == 2)
 					c.getPA().startTeleport(2884, 3395, 0, "modern");
 				if (c.dialogueAction == 3)
@@ -431,6 +714,11 @@ public class ClickingButtons implements PacketType {
 				}
 				if (c.usingGlory)
 					c.getPA().startTeleport(Config.KARAMJA_X, Config.KARAMJA_Y, 0, "modern");
+                                if(c.prestigeChat == 1){
+					c.dialogueId = 39;
+					c.getDH().sendDialogues(c.dialogueId, 0);
+					return;
+				}
 				if(c.dialogueAction == 101)
 					c.getDH().sendDialogues(23, 946);
 				if (c.dialogueAction == 2)
@@ -464,6 +752,11 @@ public class ClickingButtons implements PacketType {
 				}
 				if (c.usingGlory)
 					c.getPA().startTeleport(Config.MAGEBANK_X, Config.MAGEBANK_Y, 0, "modern");
+                                if(c.prestigeChat == 1){
+					c.getPA().removeAllWindows();
+					c.getPrestigeShop();
+					return;
+				}
 				if (c.dialogueAction == 2)
 					c.getPA().startTeleport(2669,3714, 0, "modern");
 				if (c.dialogueAction == 3)	
@@ -1483,46 +1776,6 @@ c.getPA().castVeng();
 break; 
 			
 
-						case 33207:
-				c.forcedText = "[QC] My Hitpoints level is  " + c.getPA().getLevelForXP(c.playerXP[3]) + ".";
-				c.forcedChatUpdateRequired = true;
-				c.updateRequired = true;
-			break;
-						case 33218:
-				c.forcedText = "[QC] My Prayer level is  " + c.getPA().getLevelForXP(c.playerXP[5]) + ".";
-				c.forcedChatUpdateRequired = true;
-				c.updateRequired = true;
-			break;
-						case 33206:
-				c.forcedText = "[QC] My Attack level is  " + c.getPA().getLevelForXP(c.playerXP[0]) + ".";
-				c.forcedChatUpdateRequired = true;
-				c.updateRequired = true;
-			break;
-						case 33212:
-				c.forcedText = "[QC] My Defence level is  " + c.getPA().getLevelForXP(c.playerXP[1]) + ".";
-				c.forcedChatUpdateRequired = true;
-				c.updateRequired = true;
-			break;
-						case 33209:
-				c.forcedText = "[QC] My Strength level is  " + c.getPA().getLevelForXP(c.playerXP[2]) + ".";
-				c.forcedChatUpdateRequired = true;
-				c.updateRequired = true;
-			break;
-						case 33215:
-				c.forcedText = "[QC] My Ranged level is  " + c.getPA().getLevelForXP(c.playerXP[4]) + ".";
-				c.forcedChatUpdateRequired = true;
-				c.updateRequired = true;
-			break;
-						case 33221:
-				c.forcedText = "[QC] My Magic level is  " + c.getPA().getLevelForXP(c.playerXP[6]) + ".";
-				c.forcedChatUpdateRequired = true;
-				c.updateRequired = true;
-			break;
-			case 47130:
-				c.forcedText = "I must slay another " + c.taskAmount + " " + Server.npcHandler.getNpcListName(c.slayerTask) + ".";
-				c.forcedChatUpdateRequired = true;
-				c.updateRequired = true;
-			break;
 			
 			case 24017:
 				c.getPA().resetAutocast();

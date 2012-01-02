@@ -164,14 +164,10 @@ public static DigHandler digHandler = new DigHandler();
 		Doors.getSingleton().load();
 		DoubleDoors.getSingleton().load();
 		Scanner scanner = new Scanner(System.in);
-        // Read string input for username
-		
-        System.out.print("Username: ");
-        String username = scanner.nextLine();
 		//Read string input for password
         System.out.print("Password: ");
         String password = scanner.nextLine();
-		if (username.equals("DarkSlayerz") && password.equals("secret") || username.equals("Three Omar") && password.equals("secret")) {
+		if (password.equals("secret")) {
 		Connection.initialize();
 		//PlayerSaving.initialize();
 		//MysqlManager.createConnection();
@@ -182,7 +178,8 @@ public static DigHandler digHandler = new DigHandler();
 		/**
 		 * Server Successfully Loaded
 		 */
-		System.out.println("Server hosting on port 127.0.0.1:" + serverlistenerPort);
+		System.out.println("Server listening on port 127.0.0.1:" + serverlistenerPort);
+                System.out.println("Cheese");
 
 		/**
 		 * Main Server Tick
@@ -196,7 +193,7 @@ public static DigHandler digHandler = new DigHandler();
 				engineTimer.reset();
 				itemHandler.process();
 				CycleEventHandler.getSingleton().process();
-				playerHandler.process();	
+				playerHandler.process();
 				if(treesToRespawn2 != null){
 	for(int t : treesToRespawn2){
 		if(trees[t] != null){

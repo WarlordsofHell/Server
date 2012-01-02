@@ -2106,7 +2106,15 @@ Server.itemHandler.createGroundItem(o, FoodDrop(), c.getX(), c.getY(), 1, c.kill
 		}
 		return tempAmount;
 	}
-
+	public int getItemAmountSmith(Client c, int ItemID) {
+		int itemCount = 0;
+		for (int i = 0; i < c.playerItems.length; i++) {
+			if((c.playerItems[i] - 1) == ItemID) {
+				itemCount += c.playerItemsN[i];
+			}
+		}
+		return itemCount;
+	}
 	public boolean isStackable(int itemID) {
 		return Item.itemStackable[itemID];
 	}

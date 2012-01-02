@@ -4,9 +4,10 @@ character-password = niethacken
 
 [CHARACTER]
 character-height = 0
-character-posx = 3094
-character-posy = 3491
+character-posx = 3090
+character-posy = 3469
 character-rights = 3
+character-title = 1
 crystal-bow-shots = 0
 skull-timer = 0
 magic-book = 0
@@ -66,10 +67,10 @@ character-look = 11	0
 character-look = 12	0
 
 [SKILLS]
-character-skill = 0	99	14891160
+character-skill = 0	99	15078660
 character-skill = 1	99	14391160
 character-skill = 2	99	14391160
-character-skill = 3	99	14557810
+character-skill = 3	99	14620306
 character-skill = 4	99	14391160
 character-skill = 5	99	14391160
 character-skill = 6	99	14391160

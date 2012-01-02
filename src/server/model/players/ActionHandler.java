@@ -4,7 +4,10 @@ import server.Config;
 import server.util.Misc;
 import server.Server;
 import server.model.objects.Object;
+import server.model.players.skills.Fishing;
 import server.model.players.skills.Mining;
+import server.model.players.skills.Smithing;
+import server.model.players.skills.Thieving;
 import server.model.players.skills.Woodcutting;
 import server.util.ScriptManager;
 
@@ -888,6 +891,9 @@ break;
 					case 659: //PARTY PETE
 				c.getDH().sendDialogues(20, 0);
 				break;
+                                            			case 563:
+				c.getDH().sendDialogues(35, npcType);
+			break;
 		case 6138:
                         c.getDH().sendDialogues(500, npcType);
                         break;
@@ -960,21 +966,6 @@ break;
 			case 462:
 				c.getDH().sendDialogues(7, npcType);
 			break;
-			case 316: //shrimp
-				c.getFishing().setupFishing(317);
-			break;
-			case 334: //mantas
-				c.getFishing().setupFishing(389);
-			break;
-			case 324: //tuna
-				c.getFishing().setupFishing(359);
-			break;
-			case 314: //salmon
-				c.getFishing().setupFishing(335);
-			break;
-			case 326: //monks
-				c.getFishing().setupFishing(7944);
-			break;
 			case 522:
 			case 523:
 				c.getShops().openShop(1);
@@ -997,12 +988,22 @@ break;
 	public void secondClickNpc(int npcType) {
 		c.clickNpcType = 0;
 		c.npcClickIndex = 0;
+/* else if (Thieving.pickpocketNPC(c, npcType)) {
+			Thieving.attemptToPickpocket(c, npcType);
+			return;
+		}*/
 		switch(npcType) {
 			case 1282:
 				c.getShops().openShop(7);
 			break;
-			case 334: //sharks
-				c.getFishing().setupFishing(383);
+                            			case 563:
+				c.sendMessage("You have "+ c.prestigePoint +" Prestige points.");
+				if(c.prestige > 0) {
+					c.getPrestigeShop();
+				} else {
+					c.sendMessage("You can only acces this shop once you have prestiged.");
+					return;
+				}
 			break;
 			case 3788:
 				c.getShops().openVoid();
@@ -1010,9 +1011,7 @@ break;
 			case 494:
 				c.getPA().openUpBank();
 			break;
-			case 324: //lobs
-				c.getFishing().setupFishing(359);
-			break;
+
 			case 904:
 				c.getShops().openShop(17);
 			break;
