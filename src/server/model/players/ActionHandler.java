@@ -77,20 +77,26 @@ public class ActionHandler {
 			break;
 		
 
-case 410:
-if (c.playerMagicBook == 0) {
-c.playerMagicBook = 2;
-c.setSidebarInterface(6, 29999);
-c.sendMessage("A Lunar wisdomin fills your mind.");
-c.getPA().resetAutocast();
-} else {
-c.setSidebarInterface(6, 1151); //modern
-c.playerMagicBook = 0;
-c.sendMessage("You feel a drain on your memory.");
-c.autocastId = -1;
-c.getPA().resetAutocast();
-}
-break; 
+			case 410:
+			if (c.playerMagicBook == 0) {
+				if(c.playerEquipment[c.playerWeapon] == 4675 || c.playerEquipment[c.playerWeapon] == 14004 || c.playerEquipment[c.playerWeapon] == 14003 || c.playerEquipment[c.playerWeapon] == 14002 || c.playerEquipment[c.playerWeapon] == 14001 || c.playerEquipment[c.playerWeapon] == 15486 || c.playerEquipment[c.playerWeapon] == 15040) {
+				c.setSidebarInterface(0, 328);
+				}
+				c.playerMagicBook = 2;
+				c.setSidebarInterface(6, 16640);
+				c.sendMessage("Your mind becomes stirred with thoughs of dreams.");
+				c.getPA().resetAutocast();
+			} else {
+				if(c.playerEquipment[c.playerWeapon] == 4675 || c.playerEquipment[c.playerWeapon] == 14004 || c.playerEquipment[c.playerWeapon] == 14003 || c.playerEquipment[c.playerWeapon] == 14002 || c.playerEquipment[c.playerWeapon] == 14001 || c.playerEquipment[c.playerWeapon] == 15486 || c.playerEquipment[c.playerWeapon] == 15040) {
+				c.setSidebarInterface(0, 328);
+				}
+				c.setSidebarInterface(6, 1151); //modern
+				c.playerMagicBook = 0;
+				c.sendMessage("You feel a drain on your memory.");
+				c.autocastId = -1;
+				c.getPA().resetAutocast();
+			}
+		break;
 		case 411:
    if(c.altarPrayed == 0) {
     c.altarPrayed = 1;
@@ -897,6 +903,9 @@ break;
 		case 6138:
                         c.getDH().sendDialogues(500, npcType);
                         break;
+                case 1597:
+                    c.getDH().sendDialogues(300, npcType);
+                    break;
 			case 706:
 				c.getDH().sendDialogues(9, npcType);
 			break;

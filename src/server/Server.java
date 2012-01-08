@@ -114,10 +114,6 @@ public static DigHandler digHandler = new DigHandler();
 		/**
 		 * Starting Up Server
 		 */
-		 		/**
-		 * Starting Up Server
-		 */
-		 int Password;
 		System.setOut(new Logger(System.out));
 		System.setErr(new Logger(System.err));
 		System.out.println("Launching Warlords of Hell...");
@@ -163,23 +159,14 @@ public static DigHandler digHandler = new DigHandler();
         Region.load();
 		Doors.getSingleton().load();
 		DoubleDoors.getSingleton().load();
-		Scanner scanner = new Scanner(System.in);
-		//Read string input for password
-        System.out.print("Password: ");
-        String password = scanner.nextLine();
-		if (password.equals("secret")) {
 		Connection.initialize();
 		//PlayerSaving.initialize();
 		//MysqlManager.createConnection();
-		} else {
-			System.out.println("Invalid username or password, access denied!");
-			System.exit(0);
-		}
+
 		/**
 		 * Server Successfully Loaded
 		 */
-		System.out.println("Server listening on port 127.0.0.1:" + serverlistenerPort);
-                System.out.println("Cheese");
+		System.out.println("Server listening on port 5.175.193.189 (Hamachi) -" + serverlistenerPort);
 
 		/**
 		 * Main Server Tick

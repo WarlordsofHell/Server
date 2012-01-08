@@ -108,6 +108,12 @@ public class PlayerSave
 						p.pcPoints = Integer.parseInt(token2);
                                         } else if (line.startsWith("displayName")) {
 						p.displayName = token2;
+                                        } else if(token.equals("ban-start")) {
+                                                p.banStart = Long.parseLong(token2);
+                                        } else if(token.equals("ban-end")) {
+                                                p.banEnd = Long.parseLong(token2);
+                                        } else if(token.equals("mute-end")) {
+                                                p.muteEnd = Long.parseLong(token2);
 					} else if (token.equals("isDonator")) {
 						p.isDonator = Integer.parseInt(token2);					
 					} else if (token.equals("slayerTask")) {
@@ -265,6 +271,15 @@ public class PlayerSave
 				characterfile.write("displayName = ", 0, 14);
 				characterfile.write(p.displayName, 0, p.displayName.length());
 				characterfile.newLine();
+                                               characterfile.write("ban-start = ", 0, 12);
+               characterfile.write(Long.toString(p.banStart), 0, Long.toString(p.banStart).length());
+               characterfile.newLine();               
+               characterfile.write("ban-end = ", 0, 10);
+               characterfile.write(Long.toString(p.banEnd), 0, Long.toString(p.banEnd).length());
+               characterfile.newLine();
+               characterfile.write("mute-end = ", 0, 11);
+               characterfile.write(Long.toString(p.muteEnd), 0, Long.toString(p.muteEnd).length());
+               characterfile.newLine();
 			}
 			for (int b = 0; b < p.barrowsNpcs.length; b++) {
 				characterfile.write("brother-info = ", 0, 15);

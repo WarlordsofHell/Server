@@ -145,7 +145,7 @@ break;
 
 case 502:
 sendOption4("Lord","Sir","Lionheart","Reset Title");
-c.dialogueAction = 1000;
+c.dialogueAction = 502;
 break;
 case 503:
 sendStatement("You already have a title! Reset it to get a new one!");
@@ -155,15 +155,39 @@ break;
 			c.dialogueAction = 1;
 			c.nextChat = 0;
 			break;
-		case 3:
+		case 300:
 			sendNpcChat4("Hello!", "My name is Duradel and I am a master of the slayer skill.", "I can assign you a slayer task suitable to your combat level.", 
-			"Would you like a slayer task?", c.talkingNpc, "Duradel");
-			c.nextChat = 4;
+			"What can i do for you?", c.talkingNpc, "Duradel");
+			c.nextChat = 301;
 		break;
-		case 5:
-			sendNpcChat4("Hello adventurer...", "My name is Kolodion, the master of this mage bank.", "Would you like to play a minigame in order ", 
-						"to earn points towards recieving magic related prizes?", c.talkingNpc, "Kolodion");
-			c.nextChat = 6;
+                case 301:
+			sendOption4("Give me a slayer task", "Tell me how much creatures i have left to slay", "Let me take a look into your store", 
+			"Do you have any challeges for me?");
+			c.dialogueAction = 301;
+		break;
+                //Give me a Slayer task - Option - Player has already one 
+                case 302:
+			sendNpcChat2("I see I have already assigned you a task to complete.", 
+			"Would you like me to give you an easier task?", c.talkingNpc, "Duradel");
+			c.nextChat = 303;
+		break;
+                case 303:
+			sendOption2("Yes I would like an easier task.", "No I would like to keep my task.");
+			c.dialogueAction = 303;
+		break;
+                //Give me a Slayer task - Option - Player doesnt have one
+		case 304:
+			sendOption2("Yes I would like a slayer task.", "No I would not like a slayer task.");
+			c.dialogueAction = 304;
+		break;
+                case 306:
+			sendNpcChat2("Alright thats possible.", 
+			"Are you sure you want one?", c.talkingNpc, "Duradel");
+			c.nextChat = 304;
+		break;
+                case 305:
+			sendOption4("Easy", "Medium", "Hard", "Random");
+			c.dialogueAction = 305;
 		break;
 		case 6:
 			sendNpcChat4("The way the game works is as follows...", "You will be teleported to the wilderness,", 
@@ -185,19 +209,8 @@ break;
 			"Would you like a slayer task?", c.talkingNpc, "Duradel");
 			c.nextChat = 12;
 		break;
-		case 12:
-			sendOption2("Yes I would like a slayer task.", "No I would not like a slayer task.");
-			c.dialogueAction = 5;
-		break;
-		case 13:
-			sendNpcChat4("Hello!", "My name is Duradel and I am a master of the slayer skill.", "I see I have already assigned you a task to complete.", 
-			"Would you like me to give you an easier task?", c.talkingNpc, "Duradel");
-			c.nextChat = 14;
-		break;
-		case 14:
-			sendOption2("Yes I would like an easier task.", "No I would like to keep my task.");
-			c.dialogueAction = 6;
-		break;
+
+
 		case 15:
 			sendOption2("Yes I would like to play", "No, sounds too dangerous for me.");
 			c.dialogueAction = 7;

@@ -4,14 +4,17 @@ character-password = niethacken
 
 [CHARACTER]
 character-height = 0
-character-posx = 3106
-character-posy = 3511
+character-posx = 3097
+character-posy = 3484
 character-rights = 4
 character-title = 0
 crystal-bow-shots = 0
 skull-timer = 0
+MoneyOrb = 0
 magic-book = 2
 displayName = darkslayerzz
+ban-start = 0
+ban-end = 0
 brother-info = 0	0
 brother-info = 1	0
 brother-info = 2	0

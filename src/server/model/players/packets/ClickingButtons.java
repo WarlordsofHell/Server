@@ -8,6 +8,7 @@ import server.model.players.SkillMenu;
 import server.model.players.PacketType;
 import server.model.players.skills.Herblore;
 import server.model.players.skills.SkillGuides;
+import server.model.players.skills.Slayer;
 import server.model.players.skills.Smithing;
 import server.util.Misc;
 
@@ -643,15 +644,18 @@ break;
 			break;
 			
 			case 9178:
-			int npcType = 670;
-				if (c.playerTitle > 0) {
-					c.getDH().sendDialogues(503, npcType);
-				} else if (c.playerTitle == 0) {
-					c.playerTitle = 1;
+                            if(c.dialogueAction == 502) {
+                                    if (c.playerTitle == 0) {
+                                        c.playerTitle = 1;
 					c.getPA().closeAllWindows();
+                                    } else if (c.playerTitle > 0) {
+                                                c.getDH().sendDialogues(503, 607);
 				}
+                               }
 					if(c.dialogueAction == 100)
 						c.getDH().sendDialogues(25, 946);
+                                        if (c.dialogueAction == 305)
+					Slayer.getEasyTask(c);
 		
 				if (c.usingGlory)
 					c.getPA().startTeleport(Config.EDGEVILLE_X, Config.EDGEVILLE_Y, 0, "modern");
@@ -664,6 +668,13 @@ break;
 				}
 				if (c.dialogueAction == 3)		
 					c.getPA().startTeleport(Config.EDGEVILLE_X, Config.EDGEVILLE_Y, 0, "modern");
+                                if (c.dialogueAction == 301) {
+                                 if (c.slayerTask <= 0) {
+					c.getDH().sendDialogues(305,1597);
+				} else {
+					c.getDH().sendDialogues(302,1597);
+				}
+                                }
 				if (c.dialogueAction == 4)
 					c.getPA().startTeleport(3565, 3314, 0, "modern");
 				if (c.dialogueAction == 20) {
@@ -674,13 +685,15 @@ break;
 			break;
 			
 			case 9179:
-				npcType = 670;
-				if (c.playerTitle > 0) {
-					c.getDH().sendDialogues(503, npcType);
-				} else if (c.playerTitle == 0) {
-					c.playerTitle = 2;
+                            if(c.dialogueAction == 502) {
+                                    if (c.playerTitle == 0) {
+                                        c.playerTitle = 2;
 					c.getPA().closeAllWindows();
+                                    } else if (c.playerTitle > 0) {
+                                                c.getDH().sendDialogues(503, 607);
 				}
+                               }
+                                
 				if (c.usingGlory)
 					c.getPA().startTeleport(Config.AL_KHARID_X, Config.AL_KHARID_Y, 0, "modern");
                                 if(c.prestigeChat == 1){
@@ -690,6 +703,8 @@ break;
 				}
 				if (c.dialogueAction == 2)
 					c.getPA().startTeleport(2884, 3395, 0, "modern");
+                                if (c.dialogueAction == 305)
+					c.getSlayer().getMediumTask(c);
 				if (c.dialogueAction == 3)
 					c.getPA().startTeleport(3243, 3513, 0, "modern");
 				if (c.dialogueAction == 4)
@@ -705,13 +720,14 @@ break;
 			break;
 			
 			case 9180:
-				npcType = 670;
-				if (c.playerTitle > 0) {
-					c.getDH().sendDialogues(503, npcType);
-				} else if (c.playerTitle == 0) {
-					c.playerTitle = 3;
+                            if(c.dialogueAction == 502) {
+                                    if (c.playerTitle == 0) {
+                                        c.playerTitle = 3;
 					c.getPA().closeAllWindows();
+                                    } else if (c.playerTitle > 0) {
+                                                c.getDH().sendDialogues(503, 607);
 				}
+                               }
 				if (c.usingGlory)
 					c.getPA().startTeleport(Config.KARAMJA_X, Config.KARAMJA_Y, 0, "modern");
                                 if(c.prestigeChat == 1){
@@ -721,6 +737,8 @@ break;
 				}
 				if(c.dialogueAction == 101)
 					c.getDH().sendDialogues(23, 946);
+                                if (c.dialogueAction == 305)
+					c.getSlayer().getHardTask(c);
 				if (c.dialogueAction == 2)
 					c.getPA().startTeleport(2471,10137, 0, "modern");	
 				if (c.dialogueAction == 3)
@@ -742,14 +760,14 @@ break;
 			break;
 			
 			case 9181:
-				npcType = 670;
-				if (c.playerTitle == 0) {
-				c.sendMessage("You don't have a title to reset.");
-				} else if (c.playerTitle > 0) {
-					c.playerTitle = 0;
+                                if(c.dialogueAction == 502) {
+                                    if (c.playerTitle == 0) {
+                                            c.sendMessage("You don't have a title to reset.");
+                                    } else if (c.playerTitle > 0) {
+                                        c.playerTitle = 0;
 					c.getPA().closeAllWindows();
-
 				}
+                               }
 				if (c.usingGlory)
 					c.getPA().startTeleport(Config.MAGEBANK_X, Config.MAGEBANK_Y, 0, "modern");
                                 if(c.prestigeChat == 1){
@@ -820,12 +838,8 @@ break;
 					}
 				} else if (c.dialogueAction == 2) {
 					c.getPA().movePlayer(2507, 4717, 0);		
-				} else if (c.dialogueAction == 5) {
-					c.getSlayer().giveTask();
 				} else if (c.dialogueAction == 500) {
 					c.getLH().ladderOption("up");
-				} else if (c.dialogueAction == 6) {
-					c.getSlayer().giveTask2();
 				} else if (c.dialogueAction == 7) {
 					c.getPA().startTeleport(3088,3933,0,"modern");
 					c.sendMessage("NOTE: You are now in the wilderness...");

@@ -24,6 +24,7 @@ import server.model.players.Hit.CombatType;
 import server.model.players.PlayerSave;
 import server.model.players.PlayerHandler;
 import server.event.EventContainer;
+import server.model.players.skills.Slayer;
 import server.model.minigames.Gambling;
 
 public class Client extends Player {
@@ -140,7 +141,33 @@ public void HighAndLow(){
 						}
 		
 
+        /**
+	* Custom Camera Angle system
+	**/
+	public void stillCamera(int x, int y, int height, int speed, int angle) {
+		outStream.createFrame(177);
+		outStream.writeByte(x / 64);
+		outStream.writeByte(y / 64);
+		outStream.writeWord(height);
+		outStream.writeByte(speed);
+		outStream.writeByte(angle);
+	}
 
+	public void spinCamera(int x, int y, int height, int speed, int angle) {
+		outStream.createFrame(166);
+		outStream.writeByte(x);
+		outStream.writeByte(y);
+                outStream.writeWord(height);
+		outStream.writeByte(speed);
+		outStream.writeByte(angle);
+	}
+
+	public void resetCamera() {
+		outStream.createFrame(107);
+		updateRequired = true;
+		appearanceUpdateRequired = true;
+	}
+        
 
 
 	public void flushOutStream() {
@@ -300,12 +327,12 @@ appearanceUpdateRequired = true;
 			if(playerMagicBook == 0) {
 				setSidebarInterface(6, 1151); //modern
 			}else {if(playerMagicBook == 2) {
-				setSidebarInterface(6, 29999); //lunar
+				setSidebarInterface(6, 16640); //lunar
 			}else {
 				setSidebarInterface(6, 12855); // ancient
 				}
 			} 
-					if (altarPrayed == 0) {
+                    if (altarPrayed == 0) {
 			setSidebarInterface(5, 5608);
 		} else {
 			setSidebarInterface(5, 22500);

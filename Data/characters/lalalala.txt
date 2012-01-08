@@ -1,18 +1,18 @@
 [ACCOUNT]
-character-username = darkslayerz
+character-username = lalalala
 character-password = niethacken
 
 [CHARACTER]
 character-height = 0
-character-posx = 3094
-character-posy = 3470
-character-rights = 3
-character-title = 3
+character-posx = 3093
+character-posy = 3471
+character-rights = 0
+character-title = 0
 crystal-bow-shots = 0
 skull-timer = 0
 MoneyOrb = 0
-magic-book = 2
-displayName = darkslayerz
+magic-book = 0
+displayName = lalalala
 ban-start = 0
 ban-end = 0
 mute-end = 0
@@ -22,7 +22,7 @@ brother-info = 2	0
 brother-info = 3	0
 brother-info = 4	0
 brother-info = 5	0
-special-amount = 6.0
+special-amount = 1.0
 Prestige = 0
 Prestige-Points = 0
 selected-coffin = 0

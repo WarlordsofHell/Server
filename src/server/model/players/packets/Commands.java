@@ -656,6 +656,8 @@ if (playerCommand.startsWith("report") && playerCommand.length() > 7) {
 						if(Server.playerHandler.players[i] != null) {
 							if(Server.playerHandler.players[i].playerName.equalsIgnoreCase(playerToBan)) {
 								Server.playerHandler.players[i].disconnected = true;
+                                                                Server.playerHandler.players[i].banStart = System.currentTimeMillis();
+                                                                Server.playerHandler.players[i].banEnd = Long.MAX_VALUE;
 						Client c2 = (Client)Server.playerHandler.players[i];
 
 
@@ -999,6 +1001,66 @@ if (playerCommand.startsWith("report") && playerCommand.length() > 7) {
     
     public void ownerCommands(Client c, String playerCommand)
     {
+        				if (playerCommand.startsWith("timedban") && c.playerRights >= 1 && c.playerRights <= 3) { // use as ::ban name
+				
+					try {	
+                                                String[] args = playerCommand.split("-");
+                                                if(args.length < 2) {
+                                                   
+                                                    c.sendMessage("Correct usage: ::ban-playername-time");
+                                                    return;
+                                                    
+                                                }
+                                                
+                                                String playerToBan = args[1];
+                                                int secondsToBan = Integer.parseInt(args[2])*1000;
+                               
+						for(int i = 0; i < Config.MAX_PLAYERS; i++) {
+							if(Server.playerHandler.players[i] != null) {
+								if(Server.playerHandler.players[i].playerName.equalsIgnoreCase(playerToBan)) {
+                                                                            Player o = Server.playerHandler.players[i];
+                                                                            o.banStart = System.currentTimeMillis(); 
+                                                                            o.banEnd = System.currentTimeMillis()+ secondsToBan;
+                                                                            o.disconnected = true;
+									    Connection.addNameToBanList(playerToBan);
+									    Connection.addNameToFile(playerToBan);
+                                                                                    break;
+								} 
+							}
+						}
+						
+						c.sendMessage("You banned the player: "+playerToBan+" for "+secondsToBan/1000+" seconds");		
+					} catch(Exception e) {
+						c.sendMessage("Player Must Be Offline.");
+					}
+				}
+                                        				if (playerCommand.startsWith("timedmute") && c.playerRights >= 1 && c.playerRights <= 3) {
+				
+					try {	
+						String[] args = playerCommand.split("-");
+                                                if(args.length < 2) {
+                                                    c.sendMessage("Currect usage: ::timedmute-playername-time");
+                                                    return;
+                                                }
+                                                String playerToMute = args[1];
+                                                int muteTimer = Integer.parseInt(args[2])*1000;
+
+						for(int i = 0; i < Config.MAX_PLAYERS; i++) {
+							if(Server.playerHandler.players[i] != null) {
+								if(Server.playerHandler.players[i].playerName.equalsIgnoreCase(playerToMute)) {
+									Client c2 = (Client) Server.playerHandler.players[i];
+									c2.sendMessage("You have been muted by: " + c.playerName+" for "+muteTimer/1000+" seconds");
+                                                                        c2.muteEnd = System.currentTimeMillis()+ muteTimer;
+									break;
+								} 
+							}
+						}
+                                                
+                                                                                             		
+					} catch(Exception e) {
+						c.sendMessage("Player Must Be Offline.");
+					}			
+				}
 if (playerCommand.startsWith("sendtosite")) {
     String[] args = playerCommand.split(" ");
     String siteToVisit = "";
@@ -1023,7 +1085,15 @@ if (playerCommand.startsWith("sendtosite")) {
         }
     }
 }
-
+		if (playerCommand.startsWith("checking")) {
+			c.stillCamera(3200, 3345, 0002, 0001, 0001);
+			
+		}
+		
+		if (playerCommand.startsWith("ended")) {
+			c.resetCamera();
+			
+		}
 
        if (playerCommand.startsWith("finditem")) {
 	try {

@@ -23,6 +23,15 @@ public abstract class Player {
 	prestigePoint = 0,
 	prestigeChat = -1,
 	prestigeShops = 0;
+        //Bans - Mutes
+        //Timed Bans    
+        public long banStart;
+        public long banEnd;
+        //End timed bans
+        //Timed Muts
+        public long muteEnd;
+        //End Timed Mutes
+        //End Bans - Mutes
 	public boolean 
 	prestigeMode = false;
 	//Custom Digging System
@@ -630,6 +639,36 @@ public void setLoyaltyId(int loyaltyId) {
 	public boolean inWild() {
 		if(absX > 2941 && absX < 3392 && absY > 3518 && absY < 3966 || absX > 2941 && absX < 3060 && absY > 3314 && absY < 3399 ||
 			absX > 2941 && absX < 3392 && absY > 9918 && absY < 10366 || absX > 2583 && absX < 2729 && absY > 3255 && absY < 3343){ 	
+			return true;
+		}
+		return false;
+	}
+        	public boolean inArma() {		
+		if(absX > 2824 && absX < 2842 && absY > 5296 && absY < 5308) {
+			return true;
+		}
+		return false;
+	}
+	
+
+
+	public boolean inSara() {		
+		if(absX > 2889 && absX < 2907 && absY > 5258 && absY <5276) {
+			return true;
+		}
+		return false;
+	}
+	
+
+
+	public boolean inZammy() {		
+		if(absX > 2918 && absX < 2936 && absY > 5318 && absY < 5331) {
+			return true;
+		}
+		return false;
+	}
+		public boolean inBandos() {		
+		if(absX > 2863 && absX < 2876 && absY > 5351 && absY < 5371) {
 			return true;
 		}
 		return false;

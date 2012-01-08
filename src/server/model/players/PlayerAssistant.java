@@ -179,10 +179,13 @@ public boolean playerNameExists(String name) {
 				refreshSkill(6);		
 				return;
 	}
+                      
+                                                            
+                  
+                  
 	public void checkDateAndTime()
 	{
-		Calendar cal = new GregorianCalendar();	
-		
+		Calendar cal = new GregorianCalendar();
 		int YEAR = cal.get(Calendar.YEAR);
 		int MONTH = cal.get(Calendar.MONTH) + 1;
 		int DAY = cal.get(Calendar.DAY_OF_MONTH);
@@ -2196,7 +2199,7 @@ public void castVeng() {
 	public int getNpcId(int id) {
 		for(int i = 0; i < NPCHandler.maxNPCs; i++) {
 			if(NPCHandler.npcs[i] != null) {
-				if(Server.npcHandler.npcs[i].npcId == id) {
+				if(NPCHandler.npcs[i].npcId == id) {
 					return i;
 				}
 			}

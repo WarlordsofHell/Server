@@ -16,6 +16,7 @@ import server.world.map.VirtualWorld;
 import server.event.EventManager;
 import server.event.Event;
 import server.event.EventContainer;
+import server.model.players.PlayerHandler;
 
 public class NPCHandler {
 	public static int maxNPCs = 10000;
@@ -1334,7 +1335,8 @@ return 12694;
 						npcs[i].needRespawn = true;
 						npcs[i].actionTimer = getRespawnTime(i); // respawn time
 						dropItems(i); // npc drops items!
-						appendSlayerExperience(i);
+						Client c = (Client)PlayerHandler.players[NPCHandler.npcs[i].killedBy];
+                                                c.getSlayer().appendSlayerExperience(i);
 						appendKillCount(i);
 						npcs[i].absX = npcs[i].makeX;
 						npcs[i].absY = npcs[i].makeY;				
@@ -1667,48 +1669,7 @@ return 12694;
 		return 1;
 	}
 	
-	/**
-	* Slayer Experience
-	**/	
 
-
-	public void appendSlayerExperience(int i) {
-		int npc = 0;
-		Client c = (Client)Server.playerHandler.players[npcs[i].killedBy];
-		if(c != null) {
-			if (c.slayerTask == npcs[i].npcType ){
-				c.taskAmount--;
-				c.getPA().addSkillXP(npcs[i].MaxHP * Config.SLAYER_EXPERIENCE, 18);
-				if (c.taskAmount <= 0 ) {
-				if (npcs[i].npcType == 1645 || npcs[i].npcType == 1618 || npcs[i].npcType == 1643 || npcs[i].npcType == 941 || npcs[i].npcType == 119 || npcs[i].npcType == 82 || npcs[i].npcType == 52 || npcs[i].npcType == 1612 || npcs[i].npcType == 117 || npcs[i].npcType == 1265 || npcs[i].npcType == 112 || npcs[i].npcType == 125) {
-					c.getPA().addSkillXP((npcs[i].MaxHP * 10) * Config.SLAYER_EXPERIENCE, 18);
-					c.pcPoints += 10;
-					c.slayerTask = -1;
-					c.sendMessage("You completed your MEDIUM slayer task. Please see a slayer master to get a new one.");
-					c.sendMessage("You have received 10 SSP for this.");
-				}
-				if (npcs[i].npcType == 1624 || npcs[i].npcType == 1610 || npcs[i].npcType == 1613 || npcs[i].npcType == 1615 || npcs[i].npcType == 55 || npcs[i].npcType == 84 || npcs[i].npcType == 49 || npcs[i].npcType == 1618 || npcs[i].npcType == 941 || npcs[i].npcType == 82 || npcs[i].npcType == 2783 || npcs[i].npcType == 1341) {
-					c.getPA().addSkillXP((npcs[i].MaxHP * 12) * Config.SLAYER_EXPERIENCE, 18);
-					c.pcPoints += 15;
-					c.slayerTask = -1;
-					c.sendMessage("You completed your HARD slayer task. Please see a slayer master to get a new one.");
-					c.sendMessage("You have received 15 SSP for this.");
-				}
-				if (npcs[i].npcType == 1648 || npcs[i].npcType == 117 || npcs[i].npcType == 1265 || npcs[i].npcType == 90 || npcs[i].npcType == 103 || npcs[i].npcType == 78 || npcs[i].npcType == 119 || npcs[i].npcType == 18 || npcs[i].npcType == 101 || npcs[i].npcType == 1265 || npcs[i].npcType == 181) {
-					c.getPA().addSkillXP((npcs[i].MaxHP * 8) * Config.SLAYER_EXPERIENCE, 18);
-					c.pcPoints += 6;
-					c.slayerTask = -1;
-					c.sendMessage("You completed your EASY slayer task. Please see a slayer master to get a new one.");
-					c.sendMessage("You have received 6 SSP for this.");
-				}
-
-				}
-
-			}
-		}
-	}
-
-		
 	
 
 	

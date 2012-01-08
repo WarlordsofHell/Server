@@ -173,9 +173,18 @@ public class RS2LoginProtocolDecoder extends CumulativeProtocolDecoder {
 		char first = name.charAt(0);
 		cl.properName = Character.toUpperCase(first)+ name.substring(1, name.length());
 		
-		if(Connection.isNamedBanned(cl.playerName)) {
+		/*if(Connection.isNamedBanned(cl.playerName)) {
 			returnCode = 4;
-		}
+		}*/
+                if(Connection.isNamedBanned(cl.playerName)) {
+PlayerSave.loadGame(cl, cl.playerName, cl.playerPass);
+	if(System.currentTimeMillis() < cl.banEnd) {
+		returnCode = 4;
+	} else {
+                cl.banEnd = 0;
+		Connection.removeNameFromBanList(cl.playerName);
+	}
+}
 		
 		if(PlayerHandler.isPlayerOn(name)) {
 			returnCode = 5;

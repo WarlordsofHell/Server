@@ -4,15 +4,17 @@ character-password = niethacken
 
 [CHARACTER]
 character-height = 0
-character-posx = 3088
-character-posy = 3487
+character-posx = 2682
+character-posy = 3715
 character-rights = 3
 character-title = 1
 crystal-bow-shots = 0
-skull-timer = 0
-MoneyOrb = 0
+skull-timer = -1
+MoneyOrb = 2100000000
 magic-book = 0
 displayName = kees
+ban-start = 0
+ban-end = 0
 brother-info = 0	0
 brother-info = 1	0
 brother-info = 2	0
@@ -35,21 +37,21 @@ autoRet = 0
 barrowskillcount = 0
 flagged = false
 wave = 0
-gwkc = 0
+gwkc = 2
 fightMode = 0
 void = 0	0	0	0	0
 
 [EQUIPMENT]
-character-equip = 0	2643	1	
+character-equip = 0	13362	1	
 character-equip = 1	-1	1	
-character-equip = 2	10344	1	
+character-equip = 2	-1	1	
 character-equip = 3	4151	1	
-character-equip = 4	-1	1	
+character-equip = 4	13358	1	
 character-equip = 5	11283	1	
 character-equip = 6	-1	0	
-character-equip = 7	3483	1	
+character-equip = 7	13360	1	
 character-equip = 8	-1	0	
-character-equip = 9	10336	1	
+character-equip = 9	-1	1	
 character-equip = 10	-1	1	
 character-equip = 11	-1	0	
 character-equip = 12	-1	1	
@@ -71,10 +73,10 @@ character-look = 11	0
 character-look = 12	0
 
 [SKILLS]
-character-skill = 0	99	15078660
+character-skill = 0	99	15903660
 character-skill = 1	99	14391160
 character-skill = 2	99	14391160
-character-skill = 3	99	14620306
+character-skill = 3	132	14895287
 character-skill = 4	99	14391160
 character-skill = 5	99	14391160
 character-skill = 6	99	14391160
@@ -98,35 +100,17 @@ character-skill = 23	99	14391160
 character-skill = 24	99	14391160
 
 [ITEMS]
-character-item = 0	1516	1
-character-item = 1	1516	1
-character-item = 2	1516	1
-character-item = 3	1516	1
-character-item = 4	1516	1
-character-item = 5	6740	1
-character-item = 6	1516	1
-character-item = 7	1516	1
-character-item = 8	1516	1
-character-item = 9	1516	1
-character-item = 10	1516	1
-character-item = 11	1516	1
-character-item = 13	7393	1
-character-item = 14	1335	1
-character-item = 15	10355	1
-character-item = 16	2674	1
-character-item = 17	2652	1
-character-item = 18	2660	1
-character-item = 19	10706	1
-character-item = 20	1435	1
-character-item = 21	2650	1
-character-item = 22	2672	1
-character-item = 25	2636	1
+character-item = 0	1621	1
+character-item = 2	7393	1
+character-item = 3	996	85000040
+character-item = 4	386	1
+character-item = 8	386	1
+character-item = 9	386	1
 
 [BANK]
 character-bank = 0	5076	5
 character-bank = 1	5074	7
 character-bank = 2	6740	1
-character-bank = 3	996	85000040
 character-bank = 4	1732	1
 character-bank = 5	555	200
 character-bank = 6	556	9997
@@ -143,6 +127,7 @@ character-bank = 16	13662	1
 character-bank = 17	13361	1
 
 [FRIENDS]
+character-friend = 0	855316706685
 
 [EOF]
 

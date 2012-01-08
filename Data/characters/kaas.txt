@@ -4,12 +4,13 @@ character-password = niethacken
 
 [CHARACTER]
 character-height = 0
-character-posx = 3094
-character-posy = 3482
+character-posx = 3088
+character-posy = 3498
 character-rights = 0
 character-title = 0
 crystal-bow-shots = 0
 skull-timer = 0
+MoneyOrb = 0
 magic-book = 0
 displayName = kaas
 brother-info = 0	0
@@ -73,7 +74,7 @@ character-look = 12	0
 character-skill = 0	36	25000
 character-skill = 1	1	0
 character-skill = 2	1	0
-character-skill = 3	12	9620
+character-skill = 3	13	9620
 character-skill = 4	1	0
 character-skill = 5	1	0
 character-skill = 6	1	0
