@@ -1,0 +1,138 @@
+[ACCOUNT]
+character-username = Darkslayerzz
+character-password = 1101051011161049799107101110
+
+[CHARACTER]
+character-height = 0
+character-posx = 3090
+character-posy = 3501
+character-rights = 3
+expLock = false
+Donator-Points = 0
+crystal-bow-shots = 0
+skull-timer = -1
+MoneyOrb = 0
+magic-book = 2
+prayer-book = false
+brother-info = 0	0
+brother-info = 1	0
+brother-info = 2	0
+brother-info = 3	0
+brother-info = 4	0
+brother-info = 5	0
+special-amount = 10.0
+joinTime = -1
+selected-coffin = 0
+barrows-killcount = 0
+teleblock-length = 0
+pc-points = 0
+slayerTask = 0
+taskAmount = 0
+magePoints = 0
+autoRet = 1
+barrowskillcount = 0
+flagged = false
+wave = 0
+gwkc = 0
+fightMode = 0
+PKP = 4
+yellTag = Default tag
+constitution = 6985
+clanchat = 
+specTimer = -21694
+void = 0	0	0	0	0
+
+[EQUIPMENT]
+character-equip = 0	4753	1	
+character-equip = 1	10499	1	
+character-equip = 2	15126	1	
+character-equip = 3	9185	1	
+character-equip = 4	4736	1	
+character-equip = 5	-1	1	
+character-equip = 6	-1	1	
+character-equip = 7	4759	1	
+character-equip = 8	-1	1	
+character-equip = 9	7462	1	
+character-equip = 10	11732	1	
+character-equip = 11	-1	1	
+character-equip = 12	6737	1	
+character-equip = 13	9244	100	
+
+[LOOK]
+character-look = 0	0
+character-look = 1	0
+character-look = 2	18
+character-look = 3	26
+character-look = 4	33
+character-look = 5	36
+character-look = 6	42
+character-look = 7	10
+character-look = 8	0
+character-look = 9	0
+character-look = 10	0
+character-look = 11	0
+character-look = 12	0
+
+[SKILLS]
+character-skill = 0	99	18683736
+character-skill = 1	99	13034436
+character-skill = 2	99	19167036
+character-skill = 3	99	18589036
+character-skill = 4	99	18644236
+character-skill = 5	99	13040596
+character-skill = 6	99	13071290
+character-skill = 7	1	0
+character-skill = 8	1	0
+character-skill = 9	1	0
+character-skill = 10	1	0
+character-skill = 11	1	0
+character-skill = 12	1	0
+character-skill = 13	1	0
+character-skill = 14	1	0
+character-skill = 15	1	0
+character-skill = 16	1	0
+character-skill = 17	1	0
+character-skill = 18	1	0
+character-skill = 19	1	0
+character-skill = 20	1	0
+character-skill = 21	1	0
+character-skill = 22	1	0
+character-skill = 23	1	0
+character-skill = 24	1	0
+
+[ITEMS]
+character-item = 0	15242	1
+character-item = 1	5699	1
+character-item = 2	15244	1000
+character-item = 3	15325	1
+character-item = 4	15244	1
+character-item = 5	13737	1
+character-item = 6	6686	1
+character-item = 7	6686	1
+character-item = 8	15273	1
+character-item = 9	15273	1
+character-item = 10	3025	1
+character-item = 11	3025	1
+character-item = 12	15273	1
+character-item = 13	15273	1
+character-item = 14	15273	1
+character-item = 15	15273	1
+character-item = 16	15273	1
+character-item = 17	15273	1
+character-item = 18	15273	1
+character-item = 19	15273	1
+character-item = 20	15273	1
+character-item = 21	15273	1
+character-item = 22	15273	1
+character-item = 23	15273	1
+character-item = 24	15273	1
+character-item = 25	15273	1
+character-item = 26	15273	1
+character-item = 27	15273	1
+
+[BANK]
+
+[FRIENDS]
+
+[EOF]
+
