@@ -97,7 +97,7 @@ public int MoneyCash = 0;
 	public int rockX, rockY;
         //End Mining
         //Smithing
-                	public boolean amountToSmelt5;
+         public boolean amountToSmelt5;
 	public boolean amountToSmelt10;
 	public boolean amountToSmelt1;
         public int doAmount;

@@ -19,24 +19,51 @@ public class RemoveItem implements PacketType {
 		String name = "null";
 	
 		switch(interfaceId) {
-			
+						case 7423:
+			if(c.inTrade) {
+				c.getTradeAndDuel().declineTrade(true);
+				return;
+			}
+			c.getItems().bankItem(removeId, removeSlot, 1);
+			c.getItems().resetItems(7423);
+			break;
 			case 1688:
+			if(c.inTrade) {
+				c.getTradeAndDuel().declineTrade(true);
+				return;
+			}
 			c.getItems().removeItem(removeId, removeSlot);
 			break;
 			
 			case 5064:
+			if(c.inTrade) {
+				c.getTradeAndDuel().declineTrade(true);
+				return;
+			}
 			c.getItems().bankItem(removeId, removeSlot, 1);
 			break;
 			
 			case 5382:
+			if(c.inTrade) {
+				c.getTradeAndDuel().declineTrade(true);
+				return;
+			}
 			c.getItems().fromBank(removeId, removeSlot, 1);
 			break;
 			
 			case 3900:
+			if(c.inTrade) {
+				c.getTradeAndDuel().declineTrade(true);
+				return;
+			}
 			c.getShops().buyFromShopPrice(removeId, removeSlot);
 			break;
 			
 			case 3823:
+			if(c.inTrade) {
+				c.getTradeAndDuel().declineTrade(true);
+				return;
+			}
 			c.getShops().sellToShopPrice(removeId, removeSlot);
 			break;
 			

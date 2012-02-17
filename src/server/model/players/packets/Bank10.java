@@ -14,22 +14,44 @@ public class Bank10 implements PacketType {
 	int removeSlot = c.getInStream().readUnsignedWordA();
 					
 		switch(interfaceId){
+                    			case 7423:
+			if(c.inTrade) {
+				c.getTradeAndDuel().declineTrade(true);
+			}
+			c.getItems().bankItem(removeId, removeSlot, 10);
+			c.getItems().resetItems(7423);
+			break;
 			case 1688:
-				c.getPA().useOperate(removeId);
+			if(c.inTrade) {
+				c.getTradeAndDuel().declineTrade(true);
+			}
+			c.getPA().useOperate(removeId);
 			break;
 			case 3900:
+			if(c.inTrade) {
+				c.getTradeAndDuel().declineTrade(true);
+			}
 			c.getShops().buyItem(removeId, removeSlot, 5);
 			break;
 			
 			case 3823:
+			if(c.inTrade) {
+				c.getTradeAndDuel().declineTrade(true);
+			}
 			c.getShops().sellItem(removeId, removeSlot, 5);
-			break;	
+			break;
 
 			case 5064:
+			if(c.inTrade) {
+				c.getTradeAndDuel().declineTrade(true);
+			}
 			c.getItems().bankItem(removeId, removeSlot, 10);
 			break;
 			
 			case 5382:
+			if(c.inTrade) {
+				c.getTradeAndDuel().declineTrade(true);
+			}
 			c.getItems().fromBank(removeId, removeSlot, 10);
 			break;
 			
